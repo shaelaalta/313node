@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="stylesheets/letter.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+    <main id="price">
+    <h1>Price Your Package</h1>
+    <form action="/packageMath" method="POST">
+        <label for="packageT">Type of Package</label>
+        <select id="packageT" name="packageT">
+            <option value="Stamped Letter">stamped letter</option>
+            <option value="Metered Letter">metered letter</option>
+            <option value="Large Envelope">large envelope</option>
+            <option value="Retail Package">retail package</option>
+        </select>
+        <label for="ozSize">Size in Ounces</label>
+        <input type="number" id="ozSize" name="ozSize"/>
+        <input id="submit" type="submit" value="Submit" />
+    </form>
+    <span id="result"></span>
+    </main>
+</body>
+</html>

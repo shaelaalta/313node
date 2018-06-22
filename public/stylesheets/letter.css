@@ -1,0 +1,59 @@
+body {
+    background-color: azure;
+}
+
+#price{
+    width: 100%;
+    padding: 3vw;
+    font-size: 5vw;
+}
+
+label {
+    display: block;
+    font-size: 4vw;
+    padding: 3px;
+}
+
+select, option {
+    font-size: 3vw;
+    margin-bottom: 15px;
+}
+
+input {
+    display: block;
+    padding: 3px;
+    font-size: 3vw;
+    margin-bottom: 15px;
+}
+
+#submit{
+    padding: 2vw;
+    font-size: 4vw;
+    background-color: dimgray;
+    color: white;
+    border-radius: 10px;
+}
+
+#submit:hover {
+    background-color: darkslategray;
+}
+
+/***************************************************
+****************************************************
+* LARGE SCREEN
+****************************************************
+****************************************************/
+@media (min-width: 900px) {
+    #price{
+        max-width: 900px;
+        padding: 15px;
+        font-size: 35px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    select, option { font-size: 25px; }
+    label { font-size: 30px; }
+    input { font-size: 30px; }
+    #submit { font-size: 37px; }
+}
