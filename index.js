@@ -42,7 +42,7 @@ function addFamily(req, response){
     var street = req.body.street;
     var password = req.body.password;
     
-    getFamilyInfo(lname, mom, dad, city, state, street, password, function(error, result){
+ getFamilyInfo(lname, mom, dad, city, state, street, password, function(error, result){
         if(error || result == null || result.lenth != 1){
             response.status(500).json({success: false, data: error});
         } else {
