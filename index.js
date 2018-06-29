@@ -33,7 +33,7 @@ express()
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
-function addFamily(request, response){
+function addFamily(req, response){
     var lname = req.body.lName;
     var mom = req.body.momName;
     var dad = req.body.dadName;
