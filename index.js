@@ -24,7 +24,7 @@ express()
           })
 
 .post('/addFam', function(req, res){
-    
+    addFamily(req, res);
 })
     
 .get('/getPerson', function(request, response) {
@@ -32,6 +32,25 @@ express()
     })
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
+
+function addFamily(request, response){
+    var lname = req.body.lName;
+    var mom = req.body.momName;
+    var dad = req.body.dadName;
+    var city = req.body.city;
+    var state = req.body.state;
+    var street = req.body.street;
+    var password = req.body.password;
+    
+    getFamilyInfo(lname, mom, dad, city, state, street, password, function(error, result){
+        if(error || result == null || result.lenth != 1){
+            response.status(500).json({success: false, data: error});
+        } else {
+            var family = result[0];
+            response.status(200).json(result[0]);
+        }
+    });
+}
 
 function getPerson(request, response){
     var id= request.query.id;
@@ -44,6 +63,21 @@ function getPerson(request, response){
             response.status(200).json(result[0]);
         }
     });
+}
+
+function getFamilyInfo(lname, mom, dad, city, state, street, password, callback){
+    console.log("adding " + lname + " family");
+    var sql = "INSERT INTO family VALUES (DEFUALT, $3, $2, $1, $6, $4, $5, $7)";
+    var params = [lname, mom, dad, city, state street, password];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        }
+        console.log(JSON.stringify(result.rows));
+        callback(null, result.rows);
+    })
 }
 
 function getPersonFromDb(id, callback){
