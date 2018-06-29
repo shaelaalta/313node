@@ -16,7 +16,7 @@ express()
     .set('views', path.join(__dirname, 'views'))
     .set('view engine', 'ejs')
     .get('/', (req, res) => res.render('pages/index'))
-
+    .get('/openFam', (req, res) => res.render('pages/makeFamily'))
     .post('/packageMath', urlencodedParser, function(req, res){
     var price = stampMath(req.body.ozSize, req.body.packageT)
           res.render('pages/price', {data: req.body, 'amount': price});
