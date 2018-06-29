@@ -11,18 +11,23 @@ const pool = new Pool({connectionString: connectionString});
 const PORT = process.env.PORT || 5000
 
 express()
-    .use(express.static(path.join(__dirname, 'public')))
-    .use(express.json())
-    .set('views', path.join(__dirname, 'views'))
-    .set('view engine', 'ejs')
-    .get('/', (req, res) => res.render('pages/index'))
-    .get('/openFam', (req, res) => res.render('pages/makeFamily'))
-    .post('/packageMath', urlencodedParser, function(req, res){
+.use(express.static(path.join(__dirname, 'public')))
+.use(express.json())
+.set('views', path.join(__dirname, 'views'))
+.set('view engine', 'ejs')
+.get('/', (req, res) => res.render('pages/index'))
+.get('/openFam', (req, res) => res.render('pages/makeFamily'))
+    
+.post('/packageMath', urlencodedParser, function(req, res){
     var price = stampMath(req.body.ozSize, req.body.packageT)
           res.render('pages/price', {data: req.body, 'amount': price});
           })
+
+.post('/addFam', function(req, res){
     
-    .get('/getPerson', function(request, response) {
+})
+    
+.get('/getPerson', function(request, response) {
     getPerson(request, response);
     })
 
@@ -51,6 +56,7 @@ function getPersonFromDb(id, callback){
             console.log(err);
             callback(err, null);
         }
+        console.log("params is" + params);
         console.log(JSON.stringify(result.rows));
         callback(null, result.rows);
     });
