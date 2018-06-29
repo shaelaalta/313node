@@ -68,7 +68,7 @@ function getPerson(request, response){
 function getFamilyInfo(lname, mom, dad, city, state, street, password, callback){
     console.log("adding " + lname + " family");
     var sql = "INSERT INTO family VALUES (DEFUALT, $3, $2, $1, $6, $4, $5, $7)";
-    var params = [lname, mom, dad, city, state street, password];
+    var params = [lname, mom, dad, city, state, street, password];
     pool.query(sql, params, function(err, result){
         if(err){
             console.log("error in query: ")
