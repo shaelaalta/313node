@@ -32,8 +32,8 @@ express()
     var state = req.body.state;
     var street = req.body.street;
     var password = req.body.password;
-    var params = [lname, mom, dad, city, state, street, password];
-    console.log(params);
+    //var params = [lname, mom, dad, city, state, street, password];
+    console.log(lname);
 })
     
 .get('/getPerson', function(request, response) {
