@@ -32,7 +32,7 @@ function getPerson(request, response){
     var id= request.query.id;
     
     getPersonFromDb(id, function(error, result){
-        if(error || result == null || resut.length != 1){
+        if(error || result == null || result.length != 1){
             response.status(500).json({success: false, data: error});
         } else {
             var person = result[0];
