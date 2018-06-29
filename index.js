@@ -25,6 +25,7 @@ express()
 
 .post('/addFam', function(req, res){
     //addFamily(req, res);
+    console.log(req.body.lName);
     var lname = req.body.lName;
     var mom = req.body.momName;
     var dad = req.body.dadName;
@@ -33,7 +34,7 @@ express()
     var street = req.body.street;
     var password = req.body.password;
     //var params = [lname, mom, dad, city, state, street, password];
-    console.log(lname);
+    //console.log(lname);
 })
     
 .get('/getPerson', function(request, response) {
