@@ -24,7 +24,16 @@ express()
           })
 
 .post('/addFam', function(req, res){
-    addFamily(req, res);
+    //addFamily(req, res);
+    var lname = req.body.lName;
+    var mom = req.body.momName;
+    var dad = req.body.dadName;
+    var city = req.body.city;
+    var state = req.body.state;
+    var street = req.body.street;
+    var password = req.body.password;
+    var params = [lname, mom, dad, city, state, street, password];
+    console.log(params);
 })
     
 .get('/getPerson', function(request, response) {
@@ -33,15 +42,15 @@ express()
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
-function addFamily(req, response){
-    var lname = req.body.lName;
+//function addFamily(req, response){
+    /*var lname = req.body.lName;
     var mom = req.body.momName;
     var dad = req.body.dadName;
     var city = req.body.city;
     var state = req.body.state;
     var street = req.body.street;
     var password = req.body.password;
-    console.log(lname);
+    console.log(lname);*/
     //var params = [lname, mom, dad, city, state, street, password];
     //console.log(params);
     /*getFamilyInfo(lname, mom, dad, city, state, street, password, function(error, result){
@@ -52,7 +61,7 @@ function addFamily(req, response){
             response.status(200).json(result[0]);
         }
     });*/
-}
+//}
 
 function getPerson(request, response){
     var id= request.query.id;
