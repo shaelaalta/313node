@@ -3,6 +3,11 @@ const path = require('path')
 const url = require('url');
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+const { Pool } = require("pg");
+const connectionString = process.env.DATABASE_URL;
+const pool = new Pool({connectionString: connectionString});
+
 const PORT = process.env.PORT || 5000
 
 express()
@@ -16,8 +21,40 @@ express()
     var price = stampMath(req.body.ozSize, req.body.packageT)
           res.render('pages/price', {data: req.body, 'amount': price});
           })
+    
+    .get('/getPerson', function(request, response) {
+    getPerson(request, response);
+    })
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
+
+function getPerson(request, response){
+    var id= request.query.id;
+    
+    getPersonFromDb(id, function(error, result){
+        if(error || result == null || resut.length != 1){
+            response.status(500).json({success: false, data: error});
+        } else {
+            var person = result[0];
+            response.status(200).json(result[0]);
+        }
+    });
+}
+
+function getPersonFromDb(id, callback){
+    console.log("getting db id with: " + id);
+    var sql = "SELECT * FROM family WHERE id = $1::int";
+    var params = [id];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        }
+        console.log(JSON.stringify(result.rows));
+        callback(null, result.rows);
+    });
+}
 
 function stampMath(x, y){
     if (x === 1){
