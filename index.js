@@ -60,7 +60,7 @@ function addFamily(req, response){
             response.status(200).json(result[0]);
         }
     });*/
-//}
+}
 
 function getPerson(request, response){
     var id= request.query.id;
