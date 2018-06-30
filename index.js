@@ -24,17 +24,15 @@ express()
 
 .post('/addFam', urlencodedParser, function(req, res){
     //addFamily(req, res);
-    /*var lname = req.body.lName;
+    var lname = req.body.lName;
     var mom = req.body.momName;
     var dad = req.body.dadName;
     var city = req.body.city;
     var state = req.body.state;
     var street = req.body.street;
-    var password = req.body.password;*/
-    //var params = [lname, mom, dad, city, state, street, password];
-    //console.log(lname);
-    var mom = req.body.momName;
-    res.status(200).json(mom);
+    var password = req.body.password;
+    var params = [lname, mom, dad, city, state, street, password];
+    res.status(200).json(params);
 })
     
 .get('/getPerson', function(request, response) {
