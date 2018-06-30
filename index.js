@@ -31,10 +31,11 @@ express()
             for(i = 0; i < len; i++){
                 show += "<h2>Dad "+ list[i].dadname + "</h2>";
                 show += "<h2>Mom "+ list[i].momname + "</h2>";
-                show += "<h2>Last Name "+ list[i].lastname + "</h2>";
+                show += "<h2>Last Name "+ list[i].lastname + "</h2><br>";
             }
             
-            res.render('pages/famList.ejs', {'fams': show});
+            res.status(200).json(show);
+            //res.render('pages/famList.ejs', {'fams': show});
         }
     });
 })
