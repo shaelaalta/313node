@@ -22,7 +22,7 @@ express()
         if(error || result == null || result.length == 0){
         response.status(500).json({success: false, data: error});
         } else {
-            response.status(200).json(result);
+            res.status(200).json(result);
             //var item
             //res.render('pages/index')
         }
