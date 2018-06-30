@@ -25,6 +25,11 @@ express()
 .post('/addFam', urlencodedParser, function(req, res){
     addFamily(req, res);
 })
+
+.post('/addMember', urlencodedParser, function(req, res){
+    var familyId = req.body.famId;
+    response.status(200).json(familyId);
+})
     
 .get('/getPerson', function(request, response) {
     getPerson(request, response);
@@ -32,6 +37,9 @@ express()
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
+/****************************************************
+* first getting family info from form
+*****************************************************/
 function addFamily(req, response){
     var lname = req.body.lName;
     var mom = req.body.momName;
@@ -40,33 +48,21 @@ function addFamily(req, response){
     var state = req.body.state;
     var street = req.body.street;
     var password = req.body.password;
-    //var params = [lname, mom, dad, city, state, street, password];
-    //response.status(200).json(params);
     getFamilyInfo(lname, mom, dad, city, state, street, password, function(error, result){
         if(error || result == null || result.lenth < 1){
             response.status(500).json({success: false, data: error});
         } else {
-            response.status(200).json(result[0].id);
+            //response.status(200).json(result[0].id);
+            response.render('pages/makeMember.ejs', {data: result})
         }
     });
 }
 
-function getPerson(request, response){
-    var id= request.query.id;
-    
-    getPersonFromDb(id, function(error, result){
-        if(error || result == null || result.length != 1){
-            response.status(500).json({success: false, data: error});
-        } else {
-            var person = result[0].id;
-            response.status(200).json(result[0]);
-        }
-    });
-}
-
+/******************************************
+* add info into db returns new id
+*******************************************/
 function getFamilyInfo(lname, mom, dad, city, state, street, password, callback){
     var sql = "INSERT INTO family VALUES (DEFAULT, $3, $2, $1, $6, $4, $5, $7) RETURNING id";
-    //var sql = "INSERT INTO family VALUES (DEFAULT,'" + dad + "', '" + mom + "', '" + lname + "', '" + city + ", " + street + ", " + city + ", " + state + "', '" + password + "')";
     var params = [lname, mom, dad, city, state, street, password];
     pool.query(sql, params, function(err, result){
         if(err){
@@ -80,6 +76,25 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
     })
 }
 
+/****************************************
+* get person info
+*****************************************/
+function getPerson(request, response){
+    var id= request.query.id;
+    
+    getPersonFromDb(id, function(error, result){
+        if(error || result == null || result.length != 1){
+            response.status(500).json({success: false, data: error});
+        } else {
+            var person = result[0].id;
+            response.status(200).json(result[0]);
+        }
+    });
+}
+
+/************************************
+* gets person from db
+*************************************/
 function getPersonFromDb(id, callback){
     console.log("getting db id with: " + id);
     var sql = "SELECT * FROM family WHERE id = $1::int";
@@ -96,6 +111,9 @@ function getPersonFromDb(id, callback){
     });
 }
 
+/******************************
+* does math for mail
+*******************************/
 function stampMath(x, y){
     if (x === 1){
         x += 1; 
@@ -138,6 +156,9 @@ function stampMath(x, y){
     return shareTotal;
 }
 
+/*******************************
+* gets total for mail math
+*******************************/
 function getTotal(x, start, add){
     x = x - 1;
     var math = (((x * add) + start)/100);
