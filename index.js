@@ -43,10 +43,10 @@ function addFamily(req, response){
     //var params = [lname, mom, dad, city, state, street, password];
     //response.status(200).json(params);
     getFamilyInfo(lname, mom, dad, city, state, street, password, function(error, result){
-        if(error || result == null || result.lenth != 1){
+        if(error || result == null || result.lenth < 1){
             response.status(500).json({success: false, data: error});
         } else {
-            response.status(200).json(result);
+            response.status(200).json(result[0].id);
         }
     });
 }
@@ -58,7 +58,7 @@ function getPerson(request, response){
         if(error || result == null || result.length != 1){
             response.status(500).json({success: false, data: error});
         } else {
-            var person = result[0];
+            var person = result[0].id;
             response.status(200).json(result[0]);
         }
     });
@@ -76,7 +76,7 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
         }
         console.log("params ... " + params);
         console.log(JSON.stringify(result.rows[0].id));
-        callback(null, result.rows[0].id);
+        callback(null, result.rows);
     })
 }
 
