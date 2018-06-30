@@ -15,12 +15,24 @@ express()
 .use(express.json())
 .set('views', path.join(__dirname, 'views'))
 .set('view engine', 'ejs')
-.get('/', (req, res) => res.render('pages/index'))
+//.get('/', (req, res) => res.render('pages/index'))
+
+.get('/', function(req, res){
+    familiesDb(function(error, result){
+        if(error || result == null || result.length == 0){
+        response.status(500).json({success: false, data: error});
+        } else {
+            response.status(200).json(result);
+            //var item
+            //res.render('pages/index')
+        }
+    });
+})
 
 .post('/packageMath', urlencodedParser, function(req, res){
     var price = stampMath(req.body.ozSize, req.body.packageT)
-          res.render('pages/price', {data: req.body, 'amount': price});
-          })
+    res.render('pages/price', {data: req.body, 'amount': price});
+})
 
 .post('/addFam', urlencodedParser, function(req, res){
     addFamily(req, res);
@@ -89,6 +101,19 @@ function getPerson(request, response){
             var person = result[0].id;
             response.status(200).json(result[0]);
         }
+    });
+}
+
+function familiesDb(){
+    var sql = "SELECT * FROM family";
+    pool.query(sql, function(err, result){
+      if(err){
+          console.log("error in query: ")
+          console.log(err);
+          callback(err, null);
+      }
+        console.log(JSON.stringify(result.rows));
+        callback(null, result.rows);
     });
 }
 
