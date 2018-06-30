@@ -15,7 +15,8 @@
                 <input type="email" name="mEmail" required>
                 <label for="mPassword">Password: </label>
                 <input type="password" name="mPassword" placeholder="Your password. . . " required>
-                <input type="hidden" name="famId" <%= "value='" + data.result[0].id + "'" %> >
+                <input type="hidden" name="famId" value="12">
+                <%= data.result[0].id %>
                 <button type="submit" name="action" value="register">Register</button>
             </form>
         </main>

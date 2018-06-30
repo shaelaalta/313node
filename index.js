@@ -26,10 +26,10 @@ express()
     addFamily(req, res);
 })
 
-.post('/addMember', urlencodedParser, function(req, res){
+/*.post('/addMember', urlencodedParser, function(req, res){
     var familyId = req.body.famId;
     response.status(200).json(familyId);
-})
+})*/
     
 .get('/getPerson', function(request, response) {
     getPerson(request, response);
