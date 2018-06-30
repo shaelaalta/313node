@@ -24,7 +24,6 @@ express()
 
 .post('/addFam', urlencodedParser, function(req, res){
     //addFamily(req, res);
-    console.log(req.body.momName);
     /*var lname = req.body.lName;
     var mom = req.body.momName;
     var dad = req.body.dadName;
@@ -34,6 +33,8 @@ express()
     var password = req.body.password;*/
     //var params = [lname, mom, dad, city, state, street, password];
     //console.log(lname);
+    var mom = req.body.momName;
+    console.log(mom);
 })
     
 .get('/getPerson', function(request, response) {
