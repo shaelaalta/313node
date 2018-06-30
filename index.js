@@ -24,14 +24,14 @@ express()
 
 .post('/addFam', function(req, res){
     //addFamily(req, res);
-    console.log(req.body.lName);
-    var lname = req.body.lName;
+    console.log(req.body.momName);
+    /*var lname = req.body.lName;
     var mom = req.body.momName;
     var dad = req.body.dadName;
     var city = req.body.city;
     var state = req.body.state;
     var street = req.body.street;
-    var password = req.body.password;
+    var password = req.body.password;*/
     //var params = [lname, mom, dad, city, state, street, password];
     //console.log(lname);
 })
