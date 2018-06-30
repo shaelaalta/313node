@@ -25,12 +25,14 @@ express()
             //res.status(200).json(result);
             var list = result;
             var show = "";
+            var i;
+            var len = list.length;
             
-            list.foreach(function(element){
-                show + "<h2>Dad "+ list.dadname + "</h2>";
-                show + "<h2>Mom "+ list.momname + "</h2>";
-                show + "<h2>Last Name "+list.lastname + "</h2>";
-            })
+            for(i = 0; i < len; i++){
+                show += "<h2>Dad "+ list[i].dadname + "</h2>";
+                show += "<h2>Mom "+ list[i].momname + "</h2>";
+                show += "<h2>Last Name "+ list[i].lastname + "</h2>";
+            }
             
             res.render('pages/famList.ejs', {'fams': show});
         }
