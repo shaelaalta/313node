@@ -46,7 +46,7 @@ function addFamily(req, response){
         if(error || result == null || result.lenth != 1){
             response.status(500).json({success: false, data: error});
         } else {
-            response.status(200).json(happyDay);
+            response.status(200).json(result.insertId);
         }
     });
 }
@@ -75,8 +75,8 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
             callback(err, null);
         }
         console.log("params ... " + params);
-        //console.log(JSON.stringify(result.rows));
-        callback(null, result);
+        console.log(JSON.stringify(result.insertId));
+        callback(null, result.insertId);
     })
 }
 
