@@ -22,7 +22,7 @@ express()
           res.render('pages/price', {data: req.body, 'amount': price});
           })
 
-.post('/addFam', function(req, res){
+.post('/addFam', urlencodedParser, function(req, res){
     //addFamily(req, res);
     console.log(req.body.momName);
     /*var lname = req.body.lName;
