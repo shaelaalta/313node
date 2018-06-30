@@ -34,7 +34,7 @@ express()
     //var params = [lname, mom, dad, city, state, street, password];
     //console.log(lname);
     var mom = req.body.momName;
-    console.log(mom);
+    res.status(200).json(mom);
 })
     
 .get('/getPerson', function(request, response) {
