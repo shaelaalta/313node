@@ -75,10 +75,10 @@ function getPerson(request, response){
 }
 
 function getFamilyInfo(lname, mom, dad, city, state, street, password, callback){
-    var params = [lname, mom, dad, city, state, street, password];
-    response.status(200).json(params);
+    //var params = [lname, mom, dad, city, state, street, password];
+    //response.status(200).json(params);
     //console.log("adding " + lname + " family");
-    /*var sql = "INSERT INTO family VALUES (DEFAULT, $3, $2, $1, $6, $4, $5, $7)";
+    var sql = "INSERT INTO family VALUES (DEFAULT, $3, $2, $1, $6, $4, $5, $7)";
     var params = [lname, mom, dad, city, state, street, password];
     pool.query(sql, params, function(err, result){
         if(err){
@@ -89,7 +89,7 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
         console.log("params ... " + params);
         console.log(JSON.stringify(result.rows));
         callback(null, result.rows);
-    })*/
+    })
 }
 
 function getPersonFromDb(id, callback){
