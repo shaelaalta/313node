@@ -15,16 +15,24 @@ express()
 .use(express.json())
 .set('views', path.join(__dirname, 'views'))
 .set('view engine', 'ejs')
-//.get('/', (req, res) => res.render('pages/index'))
+.get('/', (req, res) => res.render('pages/index'))
 
-.get('/', function(req, res){
+.get('/familyList', function(req, res){
     familiesDb(function(error, result){
         if(error || result == null || result.length == 0){
         response.status(500).json({success: false, data: error});
         } else {
-            res.status(200).json(result);
-            //var item
-            //res.render('pages/index')
+            //res.status(200).json(result);
+            var list = result;
+            var show = "";
+            
+            list.foreach(function(element){
+                show + "<h2>Dad "+ list.dadname + "</h2>";
+                show + "<h2>Mom "+ list.momname + "</h2>";
+                show + "<h2>Last Name "+list.lastname + "</h2>";
+            })
+            
+            res.render('pages/famList.ejs', {'fams': show});
         }
     });
 })
