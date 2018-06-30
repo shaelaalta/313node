@@ -46,7 +46,7 @@ function addFamily(req, response){
         if(error || result == null || result.lenth != 1){
             response.status(500).json({success: false, data: error});
         } else {
-            response.status(200).json(result.insertId);
+            response.status(200).json(result.rows[0].id);
         }
     });
 }
@@ -65,7 +65,7 @@ function getPerson(request, response){
 }
 
 function getFamilyInfo(lname, mom, dad, city, state, street, password, callback){
-    var sql = "INSERT INTO family VALUES (DEFAULT, $3, $2, $1, $6, $4, $5, $7)";
+    var sql = "INSERT INTO family VALUES (DEFAULT, $3, $2, $1, $6, $4, $5, $7) RETURNING id";
     //var sql = "INSERT INTO family VALUES (DEFAULT,'" + dad + "', '" + mom + "', '" + lname + "', '" + city + ", " + street + ", " + city + ", " + state + "', '" + password + "')";
     var params = [lname, mom, dad, city, state, street, password];
     pool.query(sql, params, function(err, result){
@@ -75,8 +75,8 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
             callback(err, null);
         }
         console.log("params ... " + params);
-        console.log(JSON.stringify(result.insertId));
-        callback(null, result.insertId);
+        console.log(JSON.stringify(result.rows[0].id));
+        callback(null, result.rows);
     })
 }
 
