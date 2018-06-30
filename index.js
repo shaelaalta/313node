@@ -104,7 +104,7 @@ function getPerson(request, response){
     });
 }
 
-function familiesDb(){
+function familiesDb(callback){
     var sql = "SELECT * FROM family";
     pool.query(sql, function(err, result){
       if(err){
