@@ -23,7 +23,25 @@ express()
           })
 
 .post('/addFam', urlencodedParser, function(req, res){
-    //addFamily(req, res);
+    addFamily(req, res);
+    /*var lname = req.body.lName;
+    var mom = req.body.momName;
+    var dad = req.body.dadName;
+    var city = req.body.city;
+    var state = req.body.state;
+    var street = req.body.street;
+    var password = req.body.password;
+    var params = [lname, mom, dad, city, state, street, password];
+    res.status(200).json(params);*/
+})
+    
+.get('/getPerson', function(request, response) {
+    getPerson(request, response);
+    })
+
+.listen(PORT, () => console.log(`listening on port ${ PORT }`));
+
+function addFamily(req, response){
     var lname = req.body.lName;
     var mom = req.body.momName;
     var dad = req.body.dadName;
@@ -33,24 +51,6 @@ express()
     var password = req.body.password;
     var params = [lname, mom, dad, city, state, street, password];
     res.status(200).json(params);
-})
-    
-.get('/getPerson', function(request, response) {
-    getPerson(request, response);
-    })
-
-.listen(PORT, () => console.log(`listening on port ${ PORT }`));
-
-//function addFamily(req, response){
-    /*var lname = req.body.lName;
-    var mom = req.body.momName;
-    var dad = req.body.dadName;
-    var city = req.body.city;
-    var state = req.body.state;
-    var street = req.body.street;
-    var password = req.body.password;
-    console.log(lname);*/
-    //var params = [lname, mom, dad, city, state, street, password];
     //console.log(params);
     /*getFamilyInfo(lname, mom, dad, city, state, street, password, function(error, result){
         if(error || result == null || result.lenth != 1){
