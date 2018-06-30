@@ -67,7 +67,7 @@ function getPerson(request, response){
 
 function getFamilyInfo(lname, mom, dad, city, state, street, password, callback){
     //var sql = "INSERT INTO family VALUES (DEFAULT, $3, $2, $1, $6, $4, $5, $7)";
-    var sql = "INSERT INTO family VALUES (DEFAULT," + dad + ", " + mom + ", " + lname + ", " + city + ", " + street + ", " + city + ", " + state + ", " + password + ")";
+    var sql = "INSERT INTO family VALUES (DEFAULT,'" + dad + "', '" + mom + "', '" + lname + "', '" + city + ", " + street + ", " + city + ", " + state + "', '" + password + "')";
     var params = [lname, mom, dad, city, state, street, password];
     //pool.query(sql, params, function(err, result){
     pool.query(sql, function(err, result){
