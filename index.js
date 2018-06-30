@@ -50,7 +50,7 @@ function addFamily(req, response){
     var street = req.body.street;
     var password = req.body.password;
     var params = [lname, mom, dad, city, state, street, password];
-    res.status(200).json(params);
+    response.status(200).json(params);
     //console.log(params);
     /*getFamilyInfo(lname, mom, dad, city, state, street, password, function(error, result){
         if(error || result == null || result.lenth != 1){
