@@ -53,7 +53,7 @@ function addFamily(req, response){
             response.status(500).json({success: false, data: error});
         } else {
             //response.status(200).json(result[0].id);
-            response.render('pages/makeMember.ejs', {data: result})
+           var item = result[0].id; response.render('pages/makeMember.ejs', {'fam': item})
         }
     });
 }
