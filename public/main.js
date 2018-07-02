@@ -19,10 +19,12 @@ function loadData(items){
     var i;
     var len = list.length;     
     for(i = 0; i < len; i++){
-        if(list[i] != ""){
+        if(list[i].dadname != ""){
             show += "<h2>Dad: "+ list[i].dadname + "</h2>";
         }
+        if(list[i].momname != ""){
         show += "<h2>Mom: "+ list[i].momname + "</h2>";
+        }
         show += "<h2>Last Name: "+ list[i].lastname + "</h2><br>";
     }
     
