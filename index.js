@@ -22,21 +22,7 @@ express()
         if(error || result == null || result.length == 0){
         res.status(500).json({success: false, data: error});
         } else {
-            //res.status(200).json(result);
-            /*
-            var show = "";
-            var i;
-            var len = list.length;
-            
-            for(i = 0; i < len; i++){
-                show += "<h2>Dad "+ list[i].dadname + "</h2>";
-                show += "<h2>Mom "+ list[i].momname + "</h2>";
-                show += "<h2>Last Name "+ list[i].lastname + "</h2><br>";
-            }*/
             var happy = { 'list': result };
-            
-            //res.status(200).json(show);
-            //res.render('pages/famList.ejs', {'fams': show})
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify(happy));
         }
