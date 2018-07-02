@@ -23,7 +23,7 @@ express()
         response.status(500).json({success: false, data: error});
         } else {
             //res.status(200).json(result);
-            var list = result;
+            /*
             var show = "";
             var i;
             var len = list.length;
@@ -32,12 +32,14 @@ express()
                 show += "<h2>Dad "+ list[i].dadname + "</h2>";
                 show += "<h2>Mom "+ list[i].momname + "</h2>";
                 show += "<h2>Last Name "+ list[i].lastname + "</h2><br>";
-            }
+            }*/
+            var list = result;
             
             //res.status(200).json(show);
             //res.render('pages/famList.ejs', {'fams': show})
-            res.setHeader('Content-Type', 'text/plain');
-            res.send(JSON.stringify(show));
+            res.setHeader('Content-Type', 'application/json');
+            console.log("before sending..." + list);
+            res.send(JSON.stringify(list));
         }
     });
 })
@@ -125,7 +127,7 @@ function familiesDb(callback){
           console.log(err);
           callback(err, null);
       }
-        console.log(JSON.stringify(result.rows));
+        //console.log(JSON.stringify(result.rows));
         callback(null, result.rows);
     });
 }
