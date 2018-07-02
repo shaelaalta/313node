@@ -33,7 +33,7 @@ express()
                 show += "<h2>Mom "+ list[i].momname + "</h2>";
                 show += "<h2>Last Name "+ list[i].lastname + "</h2><br>";
             }*/
-            var happy = { 'list' = result };
+            var happy = { 'list': result };
             
             //res.status(200).json(show);
             //res.render('pages/famList.ejs', {'fams': show})
