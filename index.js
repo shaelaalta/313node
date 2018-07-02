@@ -103,7 +103,8 @@ function getMembers(request, response){
             response.status(500).json({success: false, data: error});
         }
         else if(result == null || result < 1){
-            response.render('pages/makeMember', {fam: id});
+            //response.render('pages/makeMember', {fam: id});
+            response.render('pages/makeMember.ejs', {'fam': id})
         }
         else{
             console.log(JSON.stringify(result.rows));
