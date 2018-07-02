@@ -42,6 +42,10 @@ express()
     var familyId = req.body.famId;
     response.status(200).json(familyId);
 })*/
+
+.get('/seeMem', function(request, response){
+    getMembers(request, response);
+})
     
 .get('/getPerson', function(request, response) {
     getPerson(request, response);
@@ -88,6 +92,38 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
     })
 }
 
+/************************************
+* get members of a family
+****************************************/
+function getMembers(request, response){
+    var id = request.query.id;
+    getPplDb(id, function(error, result){
+        if(error){
+            response.status(500).json({success: false, data: error});
+        }
+        else if(result == null){
+            response.render('pages/makeMember', {fam: id});
+        }
+        else{
+            response.status(200).json(result[0].id)
+        }
+    });
+}
+
+function getPplDb(id, callback){
+    var sql = "SELECT * FROM member WHERE famid = $1::int";
+    var params = [id];
+    pool.query(sql, param, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        }
+        callback(null, result.rows);
+    });
+}
+    
+
 /****************************************
 * get person info
 *****************************************/
@@ -116,6 +152,7 @@ function familiesDb(callback){
         callback(null, result.rows);
     });
 }
+
 
 /************************************
 * gets person from db
