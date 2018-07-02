@@ -96,7 +96,7 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 * get members of a family
 ****************************************/
 function getMembers(request, response){
-    var id = request.query.id;
+    var id = parseInt(request.query.id);
     getPplDb(id, function(error, result){
         if(error){
             response.status(500).json({success: false, data: error});
