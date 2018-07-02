@@ -38,7 +38,6 @@ express()
             //res.status(200).json(show);
             //res.render('pages/famList.ejs', {'fams': show})
             res.setHeader('Content-Type', 'application/json');
-            console.log("before sending..." + happy);
             res.send(JSON.stringify(happy));
         }
     });
