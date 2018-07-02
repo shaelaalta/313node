@@ -27,5 +27,6 @@ function loadData(items){
     document.getElementById("family").innerHTML = show;
 }
 
-document.getElementById("home").addEventListener("load", showAllFams);
+//document.getElementById("home").addEventListener("load", showAllFams);
+window.addEventListener('load', showAllFams);
 //document.getElementById("home").addEventListener("click", showAllFams);
