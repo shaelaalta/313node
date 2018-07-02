@@ -33,13 +33,13 @@ express()
                 show += "<h2>Mom "+ list[i].momname + "</h2>";
                 show += "<h2>Last Name "+ list[i].lastname + "</h2><br>";
             }*/
-            var list = result;
+            var obj = { 'list' = result };
             
             //res.status(200).json(show);
             //res.render('pages/famList.ejs', {'fams': show})
             res.setHeader('Content-Type', 'application/json');
-            console.log("before sending..." + list);
-            res.send(JSON.stringify(list));
+            console.log("before sending..." + obj);
+            res.send(JSON.stringify(obj));
         }
     });
 })

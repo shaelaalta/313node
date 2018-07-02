@@ -14,7 +14,7 @@ function showAllFams(){
 function loadData(items){
     console.log(items.res);
     var list = items.res;
-    list = JSON.parse(items);
+    list = JSON.parse(list);
     var show = "";
     var i;
     var len = list.length;
