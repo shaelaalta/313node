@@ -1,4 +1,9 @@
+#home {
+    padding: 10px;
+}
+
 #secFam{
-    border: solid black 1px;
+    text-align: center;
+    border-style: solid black 1px;
     margin-bottom: 3px;
 }
