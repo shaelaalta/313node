@@ -105,7 +105,7 @@ function getMembers(request, response){
             response.render('pages/makeMember', {fam: id});
         }
         else{
-            response.status(200).json(result[0].id)
+            console.log(JSON.stringify(result.rows);
         }
     });
 }
