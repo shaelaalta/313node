@@ -19,18 +19,20 @@ function loadData(items){
     var i;
     var len = list.length;     
     for(i = 0; i < len; i++){
+        show += "<div id='secFam'>";
+        show += "<h2>Last Name: "+ list[i].lastname + "</h2>";
         if(list[i].dadname != ""){
-            show += "<h2>Dad: "+ list[i].dadname + "</h2>";
+            show += "<h3>Dad: "+ list[i].dadname + "</h3>";
         }
         if(list[i].momname != ""){
-        show += "<h2>Mom: "+ list[i].momname + "</h2>";
+        show += "<h3>Mom: "+ list[i].momname + "</h3>";
         }
-        show += "<h2>Last Name: "+ list[i].lastname + "</h2><br>";
+        show += "<h3>Address:"+ list[i].city +", "
+            +list[i].state + "<br>" + list[i].street + "</h3>";
+        show += "</div>";
     }
     
     document.getElementById("family").innerHTML = show;
 }
 
-//document.getElementById("home").addEventListener("load", showAllFams);
 window.addEventListener('load', showAllFams);
-//document.getElementById("home").addEventListener("click", showAllFams);
