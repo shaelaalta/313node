@@ -35,7 +35,9 @@ express()
             }
             
             //res.status(200).json(show);
-            res.render('pages/famList.ejs', show);
+            //res.render('pages/famList.ejs', {'fams': show})
+            res.setHeader('Content-Type', 'text/plain');
+            res.send(JSON.stringify(show));
         }
     });
 })
