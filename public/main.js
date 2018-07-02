@@ -14,12 +14,12 @@ function showAllFams(){
 
 function loadData(items){
     console.log(items.response);
-    var list = items.response;
-    list = JSON.parse(list);
+    var thing = items.response;
+    thing = JSON.parse(thing);
+    var list = thing.list;
     var show = "";
     var i;
-    var len = list.length;
-            
+    var len = list.length;     
     for(i = 0; i < len; i++){
         show += "<h2>Dad "+ list[i].dadname + "</h2>";
         show += "<h2>Mom "+ list[i].momname + "</h2>";
