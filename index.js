@@ -20,7 +20,7 @@ express()
 .get('/familyList', function(req, res){
     familiesDb(function(error, result){
         if(error || result == null || result.length == 0){
-        response.status(500).json({success: false, data: error});
+        res.status(500).json({success: false, data: error});
         } else {
             //res.status(200).json(result);
             /*
