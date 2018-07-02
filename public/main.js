@@ -10,4 +10,4 @@ function showAllFams(){
     xhttp.send();
 }
 
-document.getElementById("family").addEventListener("load", showAllFams);
+body.addEventListener("load", showAllFams);
