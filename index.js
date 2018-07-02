@@ -113,7 +113,7 @@ function getMembers(request, response){
 function getPplDb(id, callback){
     var sql = "SELECT * FROM member WHERE famid = $1::int";
     var params = [id];
-    pool.query(sql, param, function(err, result){
+    pool.query(sql, params, function(err, result){
         if(err){
             console.log("error in query: ")
             console.log(err);
