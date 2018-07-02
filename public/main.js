@@ -29,7 +29,7 @@ function loadData(items){
         }
         show += "<h3>Address: "+ list[i].city +", "
             +list[i].state + "<br>" + list[i].street + "</h3>";
-        show += "<button><a href='/seeMem?id=" + list[i].id +"'></a></button>"
+        show += "<button><a href='/seeMem?id=" + list[i].id +"'>See Family Members</a></button>"
         show += "</div>";
     }
     

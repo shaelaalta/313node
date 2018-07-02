@@ -97,11 +97,12 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 ****************************************/
 function getMembers(request, response){
     var id = parseInt(request.query.id);
+    console.log("just got the id... " + id);
     getPplDb(id, function(error, result){
         if(error){
             response.status(500).json({success: false, data: error});
         }
-        else if(result == null){
+        else if(result == null || result < 1){
             response.render('pages/makeMember', {fam: id});
         }
         else{
@@ -111,6 +112,7 @@ function getMembers(request, response){
 }
 
 function getPplDb(id, callback){
+    console.log("the db is going to get the id... " + id);
     var sql = "SELECT * FROM member WHERE famid = $1::int";
     var params = [id];
     pool.query(sql, params, function(err, result){
