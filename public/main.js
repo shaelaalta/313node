@@ -13,8 +13,8 @@ function showAllFams(){
 }
 
 function loadData(items){
-    console.log(items.res);
-    var list = items.res;
+    console.log(items.response);
+    var list = items.response;
     list = JSON.parse(list);
     var show = "";
     var i;
