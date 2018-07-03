@@ -30,10 +30,9 @@ function loadData(items){
         show += "<h3>Address: "+ list[i].city +", "
             +list[i].state + "<br>" + list[i].street + "</h3>";
         //show += "<button><a href='/seeMem?id=" + list[i].id +"'>See Family Members</a></button>"
-        show += "<button onClick = showAllMembers(" + list[i].id) + ")>See Family Members</button>";
+        show += "<button onClick = showAllMembers(" + list[i].id + ")>See Family Members</button>";
         show += "</div>";
     }
-    
     document.getElementById("family").innerHTML = show;
 }
 
