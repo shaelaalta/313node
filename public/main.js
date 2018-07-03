@@ -64,7 +64,7 @@ function showPpl(ppl){
         show += "</div>";
     }
 
-    document.getElementById("family").innerHTML = show;
+    document.getElementById("home").innerHTML = show;
 }
 
 window.addEventListener('load', showAllFams);
