@@ -29,10 +29,41 @@ function loadData(items){
         }
         show += "<h3>Address: "+ list[i].city +", "
             +list[i].state + "<br>" + list[i].street + "</h3>";
-        show += "<button><a href='/seeMem?id=" + list[i].id +"'>See Family Members</a></button>"
+        //show += "<button><a href='/seeMem?id=" + list[i].id +"'>See Family Members</a></button>"
+        show += "<button onClick = showAllMembers(" + list[i].id) + ")>See Family Members</button>";
         show += "</div>";
     }
     
+    document.getElementById("family").innerHTML = show;
+}
+
+function showAllMembers(id){
+    xhttp = new XMLHttpRequest();
+    var url = '/seeMem?id='+ id;
+    xhttp.open("GET", url, true);
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            showPpl(this);
+        }
+    }
+    xhttp.send();
+}
+
+function showPpl(ppl){
+    console.log(ppl.response);
+    var loves = ppl.response;
+    loves = JSON.parse(loves);
+    var list = loves.mem;
+    var show = "";
+    var i;
+    var len = list.length;     
+    for(i = 0; i < len; i++){
+        show += "<div id='secFam'>";
+        show += "<h2>Name: "+ list[i].firstname + "</h2>";
+        show += "<h3>Email: "+ list[i].email + "</h3>";
+        show += "</div>";
+    }
+
     document.getElementById("family").innerHTML = show;
 }
 

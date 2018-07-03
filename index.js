@@ -52,6 +52,9 @@ express()
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
+/****************************************
+* adding a family member
+******************************************/
 function addFamMem(req, res){
     var name = req.body.fName;
     var email = req.body.mEmail;
@@ -80,7 +83,7 @@ function addMember(name, email, password, id, callback){
     })
 }
 /****************************************************
-* first getting family info from form
+* adding a family to the form
 *****************************************************/
 function addFamily(req, response){
     var lname = req.body.lName;
@@ -132,7 +135,11 @@ function getMembers(request, response){
             response.render('pages/makeMember.ejs', {'fam': id});
         }
         else{
-            response.status(200).json(result[0]);
+            var ppl = { 'mem': result };
+            //response.render('pages/famMember.ejs', {'ppl': result});
+            //return ppl;
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify(ppl));
         }
     });
 }

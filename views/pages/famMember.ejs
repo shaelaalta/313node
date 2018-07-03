@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="stylesheets/main.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<main id="existMember">
+<script>
+    var show = "";
+    var i;
+    var len = list.length;     
+    for(i = 0; i < len; i++){
+        show += "<div id='secFam'>";
+        show += "<h2>Last Name: "+ list[i].lastname + "</h2>";
+        if(list[i].dadname != ""){
+            show += "<h3>Dad: "+ list[i].dadname + "</h3>";
+        }
+        if(list[i].momname != ""){
+        show += "<h3>Mom: "+ list[i].momname + "</h3>";
+        }
+        show += "<h3>Address: "+ list[i].city +", "
+            +list[i].state + "<br>" + list[i].street + "</h3>";
+        show += "<button><a href='/seeMem?id=" + list[i].id +"'>See Family Members</a></button>"
+        show += "</div>";
+    }
+    document.getElementById("existMember").innerHTML = show;
+</script>
+<div id="members"></div>
+</main>
+</body>
+</html>
