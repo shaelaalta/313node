@@ -138,8 +138,8 @@ function getMembers(request, response){
             var ppl = { 'mem': result };
             //response.render('pages/famMember.ejs', {'ppl': result});
             //return ppl;
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify(ppl));
+            resuls.setHeader('Content-Type', 'application/json');
+            result.send(JSON.stringify(ppl));
         }
     });
 }
