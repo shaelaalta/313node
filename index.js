@@ -59,9 +59,9 @@ function addFamMem(req, res){
     var fId = req.body.famId;
     addMember(name, email, password, fId, function(error, result){
         if(error || result == null || result.length < 1){
-            response.status(500).json({success: false, data: error});
+            res.status(500).json({success: false, data: error});
         } else {
-            response.status(200).json(result[0].id);
+            res.status(200).json(result[0].id);
         }
     });
 }
@@ -123,7 +123,7 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 ****************************************/
 function getMembers(request, response){
     var id = parseInt(request.query.id);
-    console.log("just got the id... " + id);
+    
     getPplDb(id, function(error, result){
         if(error){
             response.status(500).json({success: false, data: error});
@@ -138,7 +138,6 @@ function getMembers(request, response){
 }
 
 function getPplDb(id, callback){
-    console.log("the db is going to get the id... " + id);
     var sql = "SELECT * FROM member WHERE famid = $1::int";
     var params = [id];
     pool.query(sql, params, function(err, result){
