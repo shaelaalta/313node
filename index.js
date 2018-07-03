@@ -38,10 +38,9 @@ express()
     addFamily(req, res);
 })
 
-/*.post('/addMember', urlencodedParser, function(req, res){
-    var familyId = req.body.famId;
-    response.status(200).json(familyId);
-})*/
+.post('/addMember', urlencodedParser, function(req, res){
+    addFamMem(req, res);
+})
 
 .get('/seeMem', function(request, response){
     getMembers(request, response);
@@ -53,6 +52,33 @@ express()
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
+function addFamMem(req, res){
+    var name = req.body.fName;
+    var email = req.body.mEmail;
+    var password = req.body.mPassword;
+    var fId = req.body.famId;
+    addMember(name, email, password, fId, function(error, result){
+        if(error || result == null || result.length < 1){
+            response.status(500).json({success: false, data: error});
+        } else {
+            response.status(200).json(result[0].id);
+        }
+    });
+}
+
+function addMember(name, email, password, id, callback){
+    var sql = "INSERT INTO member VALUES (DEFAULT, $1, $2, $3, $4) RETURNING id";
+    var params = [name, email, password, id];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        } else {
+            callback(null, result.rows);
+        }
+    })
+}
 /****************************************************
 * first getting family info from form
 *****************************************************/
@@ -86,9 +112,9 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
             console.log(err);
             callback(err, null);
         }
-        console.log("params ... " + params);
-        console.log(JSON.stringify(result.rows[0].id));
+        else {
         callback(null, result.rows);
+        }
     })
 }
 
@@ -103,10 +129,9 @@ function getMembers(request, response){
             response.status(500).json({success: false, data: error});
         }
         else if(result == null || result < 1){
-            response.render('pages/makeMember.ejs', {'fam': id})
+            response.render('pages/makeMember.ejs', {'fam': id});
         }
         else{
-            //console.log(JSON.stringify(result.rows[0]));
             response.status(200).json(result[0]);
         }
     });
