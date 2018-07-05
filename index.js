@@ -81,11 +81,8 @@ function addFile(req, res){
         //var newpath = 'C:/Users/dcru1c7prpmmo1/images/' + files.filetoupload.name;
         console.log("parsing done");
         fs.rename(oldpath, newpath, function(err){
-            if (err) {
-                fs.unlink(newpath);
-                fs.rename(oldpath, newpath);
-            } //throw err;
-            //console.log("files uploaded and moved");
+            if (err) { throw err; }
+            console.log("files uploaded and moved");
             //res.end();
         });
     });
