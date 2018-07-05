@@ -4,6 +4,7 @@ const url = require('url');
 var bodyParser = require('body-parser');
 var formidable = require('formidable');
 var fs= require('fs');
+//const http = require("http");
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const { Pool } = require("pg");
@@ -76,7 +77,8 @@ function addFile(req, res){
     form.parse(req, function (err, fields, files){
         var oldpath = files.filetoupload.path;
         //var newpath = '/images/' + files.filetoupload.name;
-        var newpath = __dirname + '/images/' + files.filetoupload.name;
+        //var newpath = __dirname + '/images/' + files.filetoupload.name;
+        var newpath = 'C:/Users/dcru1c7prpmmo1/images/' + files.filetoupload.name;
         fs.rename(oldpath, newpath, function(err){
             if (err) throw err;
             console.log("files uploaded and moved");
