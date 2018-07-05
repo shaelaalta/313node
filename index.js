@@ -76,7 +76,7 @@ function addFile(req, res){
     form.parse(req, function (err, fields, files){
         var oldpath = files.filetoupload.path;
         //var newpath = '/images/' + files.filetoupload.name;
-        var newpath = _dirname + '/images' + files.filetoupload.name;
+        var newpath = __dirname + '/images' + files.filetoupload.name;
         console.log(file.file.endPath);
         fs.rename(oldpath, newpath, function(err){
             if (err) throw err;
