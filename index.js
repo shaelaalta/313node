@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const url = require('url');
 var bodyParser = require('body-parser');
+var formidable = require('formidable');
+var fs= require('fs');
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 const { Pool } = require("pg");
@@ -55,7 +57,32 @@ express()
     res.render('pages/makeMember.ejs', {'fam': famId});
 })
 
+.post('addPics', urlencodedParser, function(req, res){
+    var famId = req.body.famId;
+    res.render('pages/loadFile.ejs', {'fam': famId});
+})
+
+.post('/fileupload', function(request, response){
+    addFile(request, response);
+})
+
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
+
+/**************************************
+* upload an image... hopefully
+***************************************/
+function addFile(req, res){
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files){
+        var oldpath = files.filetoupload.path;
+        var newpath = 'pages/images/' + files.filetoupload.name;
+        fs.rename(oldpath, newpath, function(err){
+            if(err) throw err;
+            console.log("files uploaded and moved");
+            res.end();
+        });
+    });
+}
 
 /****************************************
 * adding a family member
@@ -210,59 +237,4 @@ function getPersonFromDb(id, callback){
         console.log(JSON.stringify(result.rows));
         callback(null, result.rows);
     });
-}
-
-/******************************
-* does math for mail
-*******************************/
-function stampMath(x, y){
-    if (x === 1){
-        x += 1; 
-    }
-    var start = 0;
-    var add = 21;
-    var shareTotal;
-    
-    switch(y){
-        case 'Stamped Letter':
-            start = 50;
-            shareTotal = getTotal(x, start, add);   
-            break;
-        case 'Metered Letter':
-            start = 47;
-            shareTotal = getTotal(x, start, add);
-            break;
-        case 'Large Envelope':
-            start = 100;
-            shareTotal = getTotal(x, start, add);
-            break;
-        case 'Retail Package':
-            start = 410;
-            add = 35;
-            if(x < 5){
-                return 3.50;
-            }
-            else if(x < 9){
-                return 3.75;
-            }
-            else{
-                var correct = x - 8;
-                shareTotal = getTotal(correct, start, add);
-            }
-            break;
-        default:
-            return 111.00;
-            break;
-    }
-    return shareTotal;
-}
-
-/*******************************
-* gets total for mail math
-*******************************/
-function getTotal(x, start, add){
-    x = x - 1;
-    var math = (((x * add) + start)/100);
-    return math.toFixed(2);
-    //return math;
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang ="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="stylesheets/signIn.css" type="text/css" rel="stylesheet">
+</head>
+    <body>
+        <main id="loadFile">
+            <h1>Upload Photos</h1>
+            <form action="/fileupload" method="POST" enctype="multipart/form-data">
+                <label for="image">Load Images</label>
+                <input type="file" name="filetoupload" required>
+                <input type="hidden" name="famId" value="<%= fam %>">
+                <input type="submit">
+            </form>
+        </main>
+    </body>
+</html>
