@@ -17,7 +17,8 @@ function loadData(items){
     var list = thing.list;
     var show = "";
     var i;
-    var len = list.length;     
+    var len = list.length;  
+    show += "<form action='/addMem' method='POST'><input type='hidden' name='famId' value='" + list[0].famid + "'><input type='submit' value='Add Family Member'></form>";
     for(i = 0; i < len; i++){
         show += "<div id='secFam'>";
         show += "<h2>Last Name: "+ list[i].lastname + "</h2>";

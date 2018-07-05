@@ -50,6 +50,11 @@ express()
     getPerson(request, response);
     })
 
+.post('/addMemPage', urlencodedParser, function(req, res){
+    var famId = req.body.famId;
+    res.render('/makeMember.ejs', {'fam': famId});
+})
+
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
 /****************************************
