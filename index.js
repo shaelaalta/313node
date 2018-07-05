@@ -77,7 +77,6 @@ function addFile(req, res){
         var oldpath = files.filetoupload.path;
         //var newpath = '/images/' + files.filetoupload.name;
         var newpath = __dirname + '/images' + files.filetoupload.name;
-        console.log(file.file.endPath);
         fs.rename(oldpath, newpath, function(err){
             if (err) throw err;
             console.log("files uploaded and moved");
