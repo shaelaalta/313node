@@ -57,8 +57,8 @@ express()
     res.render('pages/makeMember.ejs', {'fam': famId});
 })
 
-.post('addPics', urlencodedParser, function(req, res){
-    var famId = req.body.famId;
+.post('/addPics', urlencodedParser, function(req, res){
+    var famId = req.body.fam;
     res.render('pages/loadFile.ejs', {'fam': famId});
 })
 
