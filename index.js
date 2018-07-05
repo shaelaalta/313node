@@ -76,13 +76,17 @@ function addFile(req, res){
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files){
         var oldpath = files.filetoupload.path;
-        //var newpath = '/images/' + files.filetoupload.name;
+        var newpath = 'images/' + files.filetoupload.name;
         //var newpath = __dirname + '/images/' + files.filetoupload.name;
-        var newpath = 'C:/Users/dcru1c7prpmmo1/images/' + files.filetoupload.name;
+        //var newpath = 'C:/Users/dcru1c7prpmmo1/images/' + files.filetoupload.name;
+        console.log("parsing done");
         fs.rename(oldpath, newpath, function(err){
-            if (err) throw err;
-            console.log("files uploaded and moved");
-            res.end();
+            if (err) {
+                fs.unlink(newpath);
+                fs.rename(oldpath, newpath);
+            } //throw err;
+            //console.log("files uploaded and moved");
+            //res.end();
         });
     });
 }
