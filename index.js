@@ -69,19 +69,24 @@ express()
 .get('/seeMem', function(request, response){
     var albums;
     var mems;
-    getMembers(request, response, function(result){
+    getMembers(request, response, collectAlbums(request, response, function(result){
+        albums = result
+    }, function(request, response){
+        console.log( albums + " and " + mems);
+    var ppl = { 'mem': mems, 'albums': albums };
+    console.log(ppl);
+    response.setHeader('Content-Type', 'application/json');
+    response.send(JSON.stringify(ppl));
+    }), function(result){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
         mems = result;
         console.log(mems);
     });
     
-    collectAlbums(request, response, function(result){
-        albums = result;
-    });
     //var ppl = getMembers(request, response);
     //var albums = collectAlbums(request, response);
-    sendIt(mems, albums, request, response);
+    //sendIt(mems, albums, request, response);
 })
     
 .get('/getPerson', function(request, response) {
@@ -226,13 +231,13 @@ function getMembers(request, response, callback){
     response.send(JSON.stringify(ppl));*/
 }
 
-function sendIt(part1, part2, request, response){
+/*function sendIt(part1, part2, request, response){
     console.log(part1 + " and " + part2);
     var ppl = { 'mem': part1, 'albums': part2 };
     console.log(ppl);
     response.setHeader('Content-Type', 'application/json');
     response.send(JSON.stringify(ppl));
-}
+}*/
 
 function getPplDb(id, callback){
     var sql = "SELECT * FROM member WHERE famid = $1::int";
