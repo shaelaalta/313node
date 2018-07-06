@@ -72,8 +72,8 @@ express()
     getMembers(request, response, function(result){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
-        console.log(result);
         mems = result;
+        console.log(mems);
     });
     
     collectAlbums(request, response, function(result){
