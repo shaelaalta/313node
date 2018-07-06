@@ -73,20 +73,27 @@ express()
 * upload an image... hopefully
 ***************************************/
 function addFile(req, res){
-    var form = new formidable.IncomingForm();
+    //var form = new formidable.IncomingForm();
+    var form = new formidable.IncomingForm({
+            uploadDir: __dirname + 'images/',
+            keepExtensions: true
+        });
     form.parse(req, function (err, fields, files){
-        var oldpath = files.filetoupload.path;
-        var newpath = 'images/' + files.filetoupload.name;
+        //var oldpath = files.filetoupload.path;
+        //var newpath = 'images/' + files.filetoupload.name;
         //var newpath = __dirname + '/images/' + files.filetoupload.name;
         //var newpath = 'C:/Users/dcru1c7prpmmo1/images/' + files.filetoupload.name;
         console.log("parsing done");
-        fs.rename(oldpath, newpath, function(err){
-            if (err) { throw err; }
-            console.log("files uploaded and moved");
+        if(err) return res.end("you fond an error fool");
+        console.log("You did it!");
+        /*fs.rename(oldpath, newpath, function(err){
+            if(err){ 
+                throw err; 
+            }
+            res.status(200).json("pic is uploaded");*/
             //res.end();
         });
-    });
-}
+    }
 
 /****************************************
 * adding a family member
