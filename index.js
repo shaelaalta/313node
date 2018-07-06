@@ -69,12 +69,32 @@ express()
 .get('/seeMem', function(request, response){
     //var albums;
     var mems;
-    getMembers(request, response, function(result, collectAlbums(request, response, mems)){
+    getMembers(request, response, function(result, collectAlbums(request, response, mems){
+        var id = parseInt(request.query.id);
+     var pics;
+     getAlbums(id, function(error, result){
+       if(error){
+           response.status(500).json({success: false, data: error});
+       }
+        else if(result == null || result <1){
+            //response.setHeader('Content-Type', 'application/json');
+            //response.send(JSON.stringify(ppl));
+            var pics = "";
+        }
+        else{
+        pics = result;
+        console.log("the album..." + pics);
+        var ppl = { 'mem': mems, 'albums': pics}; 
+        console.log(ppl);
+        response.setHeader('Content-Type', 'application/json');
+        response.send(JSON.stringify(ppl));    
+        } //its good
+    })
+    }){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
         mems = result;
         console.log(mems);
-        callback(request, response, mems);
     });
     
     //var ppl = getMembers(request, response);
@@ -202,7 +222,7 @@ function getMembers(request, response, callback){
     });
 }
     
- function collectAlbums(request, response, mems){
+ /*function collectAlbums(request, response, mems){
      var id = parseInt(request.query.id);
      var pics;
      getAlbums(id, function(error, result){
@@ -223,7 +243,7 @@ function getMembers(request, response, callback){
         response.send(JSON.stringify(ppl));    
         }
     });
-}
+}*/
 
 /*function sendIt(part1, part2, request, response){
     console.log(part1 + " and " + part2);
