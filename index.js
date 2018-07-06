@@ -67,7 +67,13 @@ express()
 })
 
 .get('/seeMem', function(request, response){
-    getMembers(request, response);
+    var members = getMembers(request, response);
+    var albums = collectAlbums(request, response);
+    var ppl = { 'mem': members, 'albums': albums};
+    console.log(ppl);
+    response.setHeader('Content-Type', 'application/json');
+    response.send(JSON.stringify(ppl));
+    
 })
     
 .get('/getPerson', function(request, response) {
@@ -168,8 +174,8 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 ****************************************/
 function getMembers(request, response){
     var id = parseInt(request.query.id);
-    var mems;
-    var pics;
+    //var mems;
+    //var pics;
     
     getPplDb(id, function(error, result){
         if(error){
@@ -179,29 +185,34 @@ function getMembers(request, response){
             response.render('pages/makeMember.ejs', {'fam': id});
         }
         else{
-            mems = result;
+            //mems = result;
             //var ppl = { 'mem': result };
             //response.setHeader('Content-Type', 'application/json');
             //response.send(JSON.stringify(ppl));
+            return result;
         }
     });
+}
     
-    getAlbums(id, function(error, result){
+ function collectAlbums(request, response){
+     var id = parseInt(request.query.id);
+     function getAlbums(id, function(error, result){
        if(error){
            response.status(500).json({success: false, data: error});
        }
         else if(result == null || result <1){
-            response.setHeader('Content-Type', 'application/json');
-            response.send(JSON.stringify(ppl));
+            //response.setHeader('Content-Type', 'application/json');
+            //response.send(JSON.stringify(ppl));
+            return "";
         }
         else{
-        pics = result;
+        //pics = result;
+            return result;
         }
     });
-    console.log(mems + pics);
-    var ppl = { 'mem': mems, 'albums': pics};
+   /* var ppl = { 'mem': mems, 'albums': pics};
     response.setHeader('Content-Type', 'application/json');
-    response.send(JSON.stringify(ppl));
+    response.send(JSON.stringify(ppl));*/
 }
 
 function getPplDb(id, callback){
