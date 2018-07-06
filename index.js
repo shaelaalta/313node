@@ -71,6 +71,7 @@ express()
     var mems;
     getMembers(request, response, collectAlbums(request, response, function(result){
         albums = result;
+    }, function(request, response){
         console.log( albums + " and " + mems);
         var ppl = { 'mem': mems, 'albums': albums };
         console.log(ppl);
@@ -184,7 +185,7 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 /************************************
 * get members of a family
 ****************************************/
-function getMembers(request, response, callback){
+function getMembers(request, response, callback, again){
     var id = parseInt(request.query.id);
     //var mems;
     //var pics;
