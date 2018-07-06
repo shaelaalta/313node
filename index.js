@@ -75,7 +75,7 @@ express()
         console.log(ppl);
         response.setHeader('Content-Type', 'application/json');
         response.send(JSON.stringify(ppl));
-    })*/), function(result){
+    })*/, function(result){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
         mems = result;
