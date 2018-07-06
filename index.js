@@ -68,6 +68,7 @@ express()
 
 .get('/seeMem', function(request, response){
     var members = getMembers(request, response);
+    console.log(members);
     var albums = collectAlbums(request, response);
     var ppl = { 'mem': members, 'albums': albums};
     console.log(ppl);
@@ -189,6 +190,7 @@ function getMembers(request, response){
             //var ppl = { 'mem': result };
             //response.setHeader('Content-Type', 'application/json');
             //response.send(JSON.stringify(ppl));
+            console.log("getMembers: " + result);
             return result;
         }
     });
