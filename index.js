@@ -67,19 +67,15 @@ express()
 })
 
 .get('/seeMem', function(request, response){
-    var albums;
+    //var albums;
     var mems;
-    getMembers(request, response, collectAlbums(request, response, function(result, function(request, response){
+    getMembers(request, response, collectAlbums(request, response, mems) /*function(result){
         console.log( albums + " and " + mems);
         var ppl = { 'mem': mems, 'albums': albums };
         console.log(ppl);
         response.setHeader('Content-Type', 'application/json');
         response.send(JSON.stringify(ppl));
-    }){
-        albums = result;
-        console.log(albums);
-        callback();
-    }), function(result){
+    })*/), function(result){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
         mems = result;
@@ -211,8 +207,9 @@ function getMembers(request, response, workit, callback){
     });
 }
     
- function collectAlbums(request, response, callback){
+ function collectAlbums(request, response, mems){
      var id = parseInt(request.query.id);
+     var pics;
      getAlbums(id, function(error, result){
        if(error){
            response.status(500).json({success: false, data: error});
@@ -220,17 +217,15 @@ function getMembers(request, response, workit, callback){
         else if(result == null || result <1){
             //response.setHeader('Content-Type', 'application/json');
             //response.send(JSON.stringify(ppl));
-            return "";
+            var pics = "";
         }
         else{
-        //pics = result;
-            //return result;
-            callback(result);
+        pics = result;
+        var ppl = { 'mem': mems, 'albums': pics};  
+        response.setHeader('Content-Type', 'application/json');
+        response.send(JSON.stringify(ppl));    
         }
     });
-   /* var ppl = { 'mem': mems, 'albums': pics};  
-    response.setHeader('Content-Type', 'application/json');
-    response.send(JSON.stringify(ppl));*/
 }
 
 /*function sendIt(part1, part2, request, response){
