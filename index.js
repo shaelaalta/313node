@@ -196,7 +196,7 @@ function getMembers(request, response){
     
  function collectAlbums(request, response){
      var id = parseInt(request.query.id);
-     function getAlbums(id, function(error, result){
+     getAlbums(id, function(error, result){
        if(error){
            response.status(500).json({success: false, data: error});
        }
