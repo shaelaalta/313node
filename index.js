@@ -25,7 +25,7 @@ var cloudinary = require('cloudinary');
 cloudinary.config({
     cloud_name: 'dipiobrm0',
     api_key: 576757747669498,
-    api_secret: 'YyvA9CHtk5pWrwQwcMl9KpifneE'
+    api_secret: process.env.CLOUDINARY_SECRET
 });
 
 const { Pool } = require("pg");
