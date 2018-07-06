@@ -66,10 +66,10 @@ express()
     addFamMem(req, res);
 })
 
-.get('/seeMem', function(request, response, sendIt){
-    var members = getMembers(request, response);
-    var albums = collectAlbums(request, response);
-    sendIt(members, albums, request, response);
+.get('/seeMem', function(request, response){
+    sendIt(getMembers(request, response), collectAlbums(request, response), request, response);
+    //var albums = collectAlbums(request, response);
+    //sendIt(members, albums, request, response);
 })
     
 .get('/getPerson', function(request, response) {
