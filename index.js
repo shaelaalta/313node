@@ -168,6 +168,8 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 ****************************************/
 function getMembers(request, response){
     var id = parseInt(request.query.id);
+    var mems;
+    var pics;
     
     getPplDb(id, function(error, result){
         if(error){
@@ -177,13 +179,29 @@ function getMembers(request, response){
             response.render('pages/makeMember.ejs', {'fam': id});
         }
         else{
-            var ppl = { 'mem': result };
-            //response.render('pages/famMember.ejs', {'ppl': result});
-            //return ppl;
+            mems = result;
+            //var ppl = { 'mem': result };
+            //response.setHeader('Content-Type', 'application/json');
+            //response.send(JSON.stringify(ppl));
+        }
+    });
+    
+    getAlbums(id, function(error, result){
+       if(error){
+           response.status(500).json({success: false, data: error});
+       }
+        else if(result == null || result <1){
             response.setHeader('Content-Type', 'application/json');
             response.send(JSON.stringify(ppl));
         }
+        else{
+        pics = result;
+        }
     });
+    console.log("mem: " + mems " and " + pics);
+    var ppl = { 'mem': mems, 'albums': pics};
+    response.setHeader('Content-Type', 'application/json');
+    response.send(JSON.stringify(ppl));
 }
 
 function getPplDb(id, callback){
@@ -198,7 +216,19 @@ function getPplDb(id, callback){
         callback(null, result.rows);
     });
 }
-    
+
+function getAlbums(id, callback){
+    var sql = "SELECT * FROM album WHERE famid = $1::int";
+    var params= [id];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        }
+        callback(null, result.rows);
+    });
+}
 
 /****************************************
 * get person info

@@ -53,6 +53,7 @@ function showPpl(ppl){
     var loves = ppl.response;
     loves = JSON.parse(loves);
     var list = loves.mem;
+    var albums = loves.albums;
     var show = "";
     var i;
     var len = list.length;  
@@ -63,6 +64,12 @@ function showPpl(ppl){
         show += "<h2>Name: "+ list[i].firstname + "</h2>";
         show += "<h3>Email: "+ list[i].email + "</h3>";
         show += "</div>";
+    }
+    
+    var m;
+    var length = albums.length;
+    for(m = 0; m < length; m++){
+        show += "<h2>Album Name: " + albums[m].albumname + "</h2>";
     }
 
     document.getElementById("family").innerHTML = show;
