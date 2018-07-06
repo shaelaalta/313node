@@ -221,7 +221,9 @@ function getMembers(request, response, workit, callback){
         }
         else{
         pics = result;
-        var ppl = { 'mem': mems, 'albums': pics};  
+        console.log("the album..." + pics);
+        var ppl = { 'mem': mems, 'albums': pics}; 
+        console.log(ppl);
         response.setHeader('Content-Type', 'application/json');
         response.send(JSON.stringify(ppl));    
         }
