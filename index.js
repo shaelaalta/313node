@@ -70,13 +70,12 @@ express()
     var albums;
     var mems;
     getMembers(request, response, collectAlbums(request, response, function(result){
-        albums = result
-    }, function(request, response){
+        albums = result;
         console.log( albums + " and " + mems);
-    var ppl = { 'mem': mems, 'albums': albums };
-    console.log(ppl);
-    response.setHeader('Content-Type', 'application/json');
-    response.send(JSON.stringify(ppl));
+        var ppl = { 'mem': mems, 'albums': albums };
+        console.log(ppl);
+        response.setHeader('Content-Type', 'application/json');
+        response.send(JSON.stringify(ppl));
     }), function(result){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
