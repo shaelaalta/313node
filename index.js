@@ -70,13 +70,13 @@ express()
     var albums;
     var mems;
     getMembers(request, response, collectAlbums(request, response, function(result){
-        albums = result;
+        albums = result
     }, function(request, response){
         console.log( albums + " and " + mems);
-        var ppl = { 'mem': mems, 'albums': albums };
-        console.log(ppl);
-        response.setHeader('Content-Type', 'application/json');
-        response.send(JSON.stringify(ppl));
+    var ppl = { 'mem': mems, 'albums': albums };
+    console.log(ppl);
+    response.setHeader('Content-Type', 'application/json');
+    response.send(JSON.stringify(ppl));
     }), function(result){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
@@ -185,7 +185,7 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 /************************************
 * get members of a family
 ****************************************/
-function getMembers(request, response, callback, again){
+function getMembers(request, response, workit, callback){
     var id = parseInt(request.query.id);
     //var mems;
     //var pics;
