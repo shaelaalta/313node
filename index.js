@@ -75,7 +75,7 @@ express()
 function addFile(req, res){
     //var form = new formidable.IncomingForm();
     var form = new formidable.IncomingForm({
-            uploadDir: __dirname + 'images/',
+            uploadDir: __dirname + '/images/',
             keepExtensions: true
         });
     form.parse(req, function (err, fields, files){
