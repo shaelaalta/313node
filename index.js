@@ -80,12 +80,12 @@ function addFile(req, res){
         });*/
     form.parse(req, function (err, fields, files){
         var oldpath = files.filetoupload.path;
-        var newpath = '/images/' + files.filetoupload.name;
+        var newpath = '/public/images/' + files.filetoupload.name;
         //var newpath = __dirname + '/images/' + files.filetoupload.name;
         //var newpath = 'C:/Users/dcru1c7prpmmo1/images/' + files.filetoupload.name;
         console.log("parsing done");
-        if(err) return res.end("you found an error fool");
-        console.log("You did it!");
+        //if(err){ return res.end("you found an error fool"); }
+        //console.log("You did it!");
         fs.rename(oldpath, newpath, function(err){
             if(err){ 
                 throw err; 
