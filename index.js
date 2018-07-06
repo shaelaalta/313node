@@ -73,26 +73,34 @@ express()
 * upload an image... hopefully
 ***************************************/
 function addFile(req, res){
-    //var form = new formidable.IncomingForm();
-    var form = new formidable.IncomingForm({
+    var form = new formidable.IncomingForm();
+    /*var form = new formidable.IncomingForm({
             uploadDir: __dirname + '/images/',
             keepExtensions: true
-        });
-    form.parse(req, function (err, fields, files){
+        });*/
+    //form.parse(req, function (err, fields, files){
         //var oldpath = files.filetoupload.path;
         //var newpath = 'images/' + files.filetoupload.name;
         //var newpath = __dirname + '/images/' + files.filetoupload.name;
         //var newpath = 'C:/Users/dcru1c7prpmmo1/images/' + files.filetoupload.name;
-        console.log("parsing done");
-        if(err) return res.end("you fond an error fool");
-        console.log("You did it!");
+        //console.log("parsing done");
+        //if(err) return res.end("you found an error fool");
+        //console.log("You did it!");
         /*fs.rename(oldpath, newpath, function(err){
             if(err){ 
                 throw err; 
             }
             res.status(200).json("pic is uploaded");*/
-            //res.end();
-        });
+            res.end();
+        //});
+    form.parse(req);
+    form.on('fileBegin', function(name, file){
+        file.path = __dirname + '/images/' + file.name;
+    });
+    form.on('file', function(name, file){
+        console.log("uploaded" + file.name);
+    });
+    res.status(200).json({'love': "it worked!"});
     }
 
 /****************************************
