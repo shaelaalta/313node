@@ -85,7 +85,7 @@ express()
 })
 
 .post('/fileupload', upload.single('image'), function(request, response){
-    cloudinary.uploader.upload(req.file.path, function(result){
+    cloudinary.uploader.upload(request.file.path, function(result){
         var imagePlace = result.secure_url;
         response.render('pages/famPics.ejs', {'pics': imagePlace})
     });
