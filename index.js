@@ -67,9 +67,21 @@ express()
 })
 
 .get('/seeMem', function(request, response){
-    sendIt(getMembers(request, response), collectAlbums(request, response), request, response);
+    var albums;
+    var mems;
+    getMembers(request, response, function(result){
+        if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
+        }
+        console.log(result);
+        mems = result;
+    });
+    
+    collectAlbums(request, response, function(result){
+        albums = result;
+    });
+    //var ppl = getMembers(request, response);
     //var albums = collectAlbums(request, response);
-    //sendIt(members, albums, request, response);
+    sendIt(mems, albums, request, response);
 })
     
 .get('/getPerson', function(request, response) {
@@ -168,7 +180,7 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 /************************************
 * get members of a family
 ****************************************/
-function getMembers(request, response){
+function getMembers(request, response, callback){
     var id = parseInt(request.query.id);
     //var mems;
     //var pics;
@@ -178,19 +190,21 @@ function getMembers(request, response){
             response.status(500).json({success: false, data: error});
         }
         else if(result == null || result < 1){
-            response.render('pages/makeMember.ejs', {'fam': id});
+            //response.render('pages/makeMember.ejs', {'fam': id});
+            return 0;
         }
         else{
             //mems = result;
             //var ppl = { 'mem': result };
             //response.setHeader('Content-Type', 'application/json');
             //response.send(JSON.stringify(ppl));
-            return result;
+           // return result;
+            callback(result);
         }
     });
 }
     
- function collectAlbums(request, response){
+ function collectAlbums(request, response, callback){
      var id = parseInt(request.query.id);
      getAlbums(id, function(error, result){
        if(error){
@@ -203,10 +217,11 @@ function getMembers(request, response){
         }
         else{
         //pics = result;
-            return result;
+            //return result;
+            callback(result);
         }
     });
-   /* var ppl = { 'mem': mems, 'albums': pics};
+   /* var ppl = { 'mem': mems, 'albums': pics};  
     response.setHeader('Content-Type', 'application/json');
     response.send(JSON.stringify(ppl));*/
 }
