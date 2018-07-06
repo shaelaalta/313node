@@ -217,7 +217,7 @@ function getMembers(request, response, callback){
             //response.setHeader('Content-Type', 'application/json');
             //response.send(JSON.stringify(ppl));
            // return result;
-            callback(result, workit);
+            callback(result);
         }
     });
 }
