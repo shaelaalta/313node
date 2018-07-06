@@ -66,15 +66,11 @@ express()
     addFamMem(req, res);
 })
 
-.get('/seeMem', function(request, response){
+.get('/seeMem', sendIt, function(request, response){
     var members = getMembers(request, response);
     console.log(members);
     var albums = collectAlbums(request, response);
-    var ppl = { 'mem': members, 'albums': albums};
-    console.log(ppl);
-    response.setHeader('Content-Type', 'application/json');
-    response.send(JSON.stringify(ppl));
-    
+    sendIt(members, albums, request, response);
 })
     
 .get('/getPerson', function(request, response) {
@@ -215,6 +211,14 @@ function getMembers(request, response){
    /* var ppl = { 'mem': mems, 'albums': pics};
     response.setHeader('Content-Type', 'application/json');
     response.send(JSON.stringify(ppl));*/
+}
+
+function sendIt(part1, part2, request, response){
+    console.log(part1 " and " part2);
+    var ppl = { 'mem': part1, 'albums': part2 };
+    console.log(ppl);
+    response.setHeader('Content-Type', 'application/json');
+    response.send(JSON.stringify(ppl));
 }
 
 function getPplDb(id, callback){
