@@ -214,7 +214,7 @@ function getMembers(request, response){
 }
 
 function sendIt(part1, part2, request, response){
-    console.log(part1 " and " part2);
+    console.log(part1 + " and " + part2);
     var ppl = { 'mem': part1, 'albums': part2 };
     console.log(ppl);
     response.setHeader('Content-Type', 'application/json');
