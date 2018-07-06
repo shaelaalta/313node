@@ -78,6 +78,7 @@ express()
     }){
         albums = result;
         console.log(albums);
+        callback();
     }), function(result){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
