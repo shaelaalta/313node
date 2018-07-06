@@ -69,13 +69,13 @@ express()
 .get('/seeMem', function(request, response){
     //var albums;
     var mems;
-    getMembers(request, response/*function(result){
+    getMembers(request, response,/*function(result){
         console.log( albums + " and " + mems);
         var ppl = { 'mem': mems, 'albums': albums };
         console.log(ppl);
         response.setHeader('Content-Type', 'application/json');
         response.send(JSON.stringify(ppl));
-    })*/, function(result, collectAlbums(request, response, mems)){
+    })*/ function(result, collectAlbums(request, response, mems)){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
         mems = result;
@@ -184,7 +184,7 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 /************************************
 * get members of a family
 ****************************************/
-function getMembers(request, response, workit, callback){
+function getMembers(request, response, callback){
     var id = parseInt(request.query.id);
     //var mems;
     //var pics;
@@ -203,7 +203,7 @@ function getMembers(request, response, workit, callback){
             //response.setHeader('Content-Type', 'application/json');
             //response.send(JSON.stringify(ppl));
            // return result;
-            callback(result);
+            callback(result, workit);
         }
     });
 }
