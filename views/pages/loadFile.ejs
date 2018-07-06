@@ -10,7 +10,9 @@
             <h1>Upload Photos</h1>
             <form action="/fileupload" method="POST" enctype="multipart/form-data">
                 <label for="image">Load Images</label>
-                <input type="file" name="filetoupload" required>
+                <input type="file" id="image" name="image" accept="image/*" required>
+                <lablel for="imageName">Label Image</lablel>
+                <input type="text" id="imageName" name="imageName">
                 <input type="submit">
             </form>
         </main>

@@ -5,7 +5,28 @@ var bodyParser = require('body-parser');
 var formidable = require('formidable');
 var fs= require('fs');
 //const http = require("http");
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var multer = require('multer');
+var storage = multer.diskStorage({
+    filename: function(req, file, callback){
+        callback(null, file.originalname);
+    }
+});
+var imageFilter = function(req, file, cb){
+    if(!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)){
+        return cb(new Error('Only image files are allowed!'), false);
+    }
+    cb(null, true);
+};
+
+var upload = multer({storage: storage, fileFilter: imageFilter})
+
+var cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'dipiobrm0',
+    api_key: 576757747669498,
+    api_secret: 'YyvA9CHtk5pWrwQwcMl9KpifneE'
+});
 
 const { Pool } = require("pg");
 const connectionString = process.env.DATABASE_URL;
@@ -63,46 +84,15 @@ express()
     res.render('pages/loadFile.ejs', {'fam': famId});
 })
 
-.post('/fileupload', function(request, response){
-    addFile(request, response);
-})
+.post('/fileupload', upload.single('image'), function(request, response){
+    cloudinary.uploader.upload(req.file.path, function(result){
+        var imagePlace = result.secure_url;
+        response.render('pages/famPics.ejs', {'pics': imagePlace})
+    });
+});
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
-/**************************************
-* upload an image... hopefully
-***************************************/
-function addFile(req, res){
-    var form = new formidable.IncomingForm();
-    /*var form = new formidable.IncomingForm({
-            uploadDir: __dirname + '/images/',
-            keepExtensions: true
-        });*/
-    form.parse(req, function (err, fields, files){
-        var oldpath = files.filetoupload.path;
-        //var newpath = '/public/images/' + files.filetoupload.name;
-        var newpath = __dirname + '/public/images/' + files.filetoupload.name;
-        //var newpath = 'C:/Users/dcru1c7prpmmo1/images/' + files.filetoupload.name;
-        console.log("parsing done");
-        //if(err){ return res.end("you found an error fool"); }
-        //console.log("You did it!");
-        fs.rename(oldpath, newpath, function(err){
-            if(err){ 
-                throw err; 
-            }
-            res.status(200).json("pic is uploaded");
-            res.end();
-        });
-    /*form.parse(req);
-    form.on('fileBegin', function(name, file){
-        file.path = __dirname + '/images/' + file.name;
-    });
-    form.on('file', function(name, file){
-        console.log("uploaded" + file.name);
-    });*/
-    //res.status(200).json({'love': "it worked!"});
-    });
-}
 
 /****************************************
 * adding a family member
