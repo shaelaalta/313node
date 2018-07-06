@@ -69,17 +69,18 @@ express()
 .get('/seeMem', function(request, response){
     //var albums;
     var mems;
-    getMembers(request, response, collectAlbums(request, response, mems) /*function(result){
+    getMembers(request, response/*function(result){
         console.log( albums + " and " + mems);
         var ppl = { 'mem': mems, 'albums': albums };
         console.log(ppl);
         response.setHeader('Content-Type', 'application/json');
         response.send(JSON.stringify(ppl));
-    })*/, function(result){
+    })*/, function(result, collectAlbums(request, response, mems)){
         if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
         }
         mems = result;
         console.log(mems);
+        callback(request, response, mems);
     });
     
     //var ppl = getMembers(request, response);
