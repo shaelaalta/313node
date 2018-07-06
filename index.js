@@ -66,9 +66,8 @@ express()
     addFamMem(req, res);
 })
 
-.get('/seeMem', sendIt, function(request, response){
+.get('/seeMem', function(request, response, sendIt){
     var members = getMembers(request, response);
-    console.log(members);
     var albums = collectAlbums(request, response);
     sendIt(members, albums, request, response);
 })
@@ -186,7 +185,6 @@ function getMembers(request, response){
             //var ppl = { 'mem': result };
             //response.setHeader('Content-Type', 'application/json');
             //response.send(JSON.stringify(ppl));
-            console.log("getMembers: " + result);
             return result;
         }
     });
