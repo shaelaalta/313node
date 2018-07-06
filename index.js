@@ -91,7 +91,7 @@ function addFile(req, res){
                 throw err; 
             }
             res.status(200).json("pic is uploaded");*/
-            res.end();
+            //res.end();
         //});
     form.parse(req);
     form.on('fileBegin', function(name, file){
