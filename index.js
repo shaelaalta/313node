@@ -198,7 +198,6 @@ function getMembers(request, response){
         pics = result;
         }
     });
-    console.log("mem: " + mems " and " + pics);
     var ppl = { 'mem': mems, 'albums': pics};
     response.setHeader('Content-Type', 'application/json');
     response.send(JSON.stringify(ppl));
