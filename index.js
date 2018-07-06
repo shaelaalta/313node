@@ -69,7 +69,7 @@ express()
 .get('/seeMem', function(request, response){
     //var albums;
     var mems;
-    getMembers(request, response, function(result, function(request, response){
+    getMembers(request, response, function(result, function(request, response, mems){
         var id = parseInt(request.query.id);
      var pics;
      getAlbums(id, function(error, result){
@@ -95,6 +95,7 @@ express()
         }
         mems = result;
         console.log(mems);
+        callback(request, response, mems);
     });
     
     //var ppl = getMembers(request, response);
