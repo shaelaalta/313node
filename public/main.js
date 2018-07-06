@@ -37,6 +37,7 @@ function loadData(items){
 }
 
 function showAllMembers(id){
+    console.log("first id: " + id);
     xhttp = new XMLHttpRequest();
     var url = '/seeMem?id='+ id;
     xhttp.open("GET", url, true);
@@ -49,6 +50,7 @@ function showAllMembers(id){
 }
 
 function showPpl(ppl){
+    console.log("second sign" + ppl);
     console.log(ppl.response);
     var loves = ppl.response;
     loves = JSON.parse(loves);
@@ -59,6 +61,7 @@ function showPpl(ppl){
     var len = list.length;  
     show += "<form action='/addMemPage' method='POST'><input type='hidden' name='famId' value='" + list[0].famid + "'><input type='submit' value='Add Family Member'></form>";
     show += "<form action='/addPics' method='POST'><input type='hidden' name='fam' value='" + list[0].famid + "'><input type='submit' value='Upload Images'></form>";
+    
     for(i = 0; i < len; i++){
         show += "<div id='secFam'>";
         show += "<h2>Name: "+ list[i].firstname + "</h2>";
