@@ -98,7 +98,7 @@ express()
     response.render('pages/makeAlbum', {'fam': famId, 'name': name});
 })
 
-.post('/makeAlbum', urlencodedParser, function(reqeust, response){
+.post('/makeAlbum', urlencodedParser, function(request, response){
     addAlbum(request, response);
 })
 
