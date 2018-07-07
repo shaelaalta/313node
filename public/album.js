@@ -22,7 +22,6 @@ function showAlbums(data){
     for(i = 0; i < len; i++){
         show += "<div id='secFam'>";
         show += "<h2>Name: " + list[i].albumname + "</h2>";
-        cosole.log(list[i].id);
         show += "<button onClick = getAlbumPics(" + list[i].id + ")>View Album</button>";
         show += "</div>";
     }
