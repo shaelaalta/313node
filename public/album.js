@@ -30,7 +30,7 @@ function showAlbums(data){
 }
 
 function getAlbums(id){
-    console.log(id);
+    console.log(id); }
     /*xhttp = new XMLHttpRequest();
     var url = '/getImages?id=' + id;
     xhttp.open("GET", url, true);
