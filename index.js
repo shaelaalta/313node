@@ -75,9 +75,8 @@ express()
         }
         else{
             mems = result;
-            console.log(mems);
+            console.log("mems: " + mems);
             collectAlbums(request, response, mems);
-        //callback(request, response, mems);
         }
     });
     
@@ -219,14 +218,10 @@ function getMembers(request, response, callback){
             var pics = "";
         }
         else{
-        pics = result;
-        console.log("the album..." + pics);
-        var ppl = { 'mem': mems, 'albums': pics}; 
-        console.log(ppl);
-        response.setHeader('Content-Type', 'application/json');
-        response.send(JSON.stringify(ppl));    
+            pics = result;    
         }
     });
+     return pics;
 }
 
 /*function sendIt(part1, part2, request, response){
