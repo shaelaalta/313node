@@ -93,9 +93,9 @@ express()
     })
 
 .get('/albumPage', function(request, response){
-    var famId = parseInt(req.query.fam);
-    var name = req.query.name;
-    res.render('pages/makeAlbum', {'fam': famId, 'name': name});
+    var famId = parseInt(reqest.query.fam);
+    var name = request.query.name;
+    response.render('pages/makeAlbum', {'fam': famId, 'name': name});
 })
 
 .post('/addMemPage', urlencodedParser, function(req, res){
