@@ -120,6 +120,7 @@ express()
     var album = request.body.album;
     var name = request.body.imageName;
     addImage(imagePlace, album, name, function(err, result){
+        console.log(result.rows);
         if(err || result == null || result.length < 1){
             response.render('pages/index');
         }
@@ -134,6 +135,7 @@ express()
 * add image to image db
 ****************************************/
 function addImage(imagePlace, album, name, callback){
+    console.log("addImage " + imagePlace " " + album + " " + name);
     var sql = "INSERT INTO image VALUES (DEFAULT, $1, $2, $3) RETURNING id";
     var params = [name, imagePlace, album];
     pool.query(sql, params, function(err, result){
