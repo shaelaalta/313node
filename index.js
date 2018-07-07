@@ -69,7 +69,7 @@ express()
 .get('/seeMem', function(request, response){
     //var albums;
     var mems;
-    getMembers(request, response, function(result, function(request, response, mems){
+    getMembers(request, response/*, function(result, function(request, response, mems){
         var id = parseInt(request.query.id);
      var pics;
      getAlbums(id, function(error, result){
@@ -89,13 +89,15 @@ express()
         response.setHeader('Content-Type', 'application/json');
         response.send(JSON.stringify(ppl));    
         } //its good
-    })
-    }){
-        if(result == 0){ response.render('pages/makeMember.ejs', {'fam': id});
+    }*/
+    ){
+        if(result == 0 || result == null){ response.render('pages/makeMember.ejs', {'fam': id});
         }
+        else{
         mems = result;
         console.log(mems);
-        callback(request, response, mems);
+        collectAlbums(request, response, mems);
+        //callback(request, response, mems);
     });
     
     //var ppl = getMembers(request, response);
@@ -223,7 +225,7 @@ function getMembers(request, response, callback){
     });
 }
     
- /*function collectAlbums(request, response, mems){
+ function collectAlbums(request, response, mems){
      var id = parseInt(request.query.id);
      var pics;
      getAlbums(id, function(error, result){
@@ -244,7 +246,7 @@ function getMembers(request, response, callback){
         response.send(JSON.stringify(ppl));    
         }
     });
-}*/
+}
 
 /*function sendIt(part1, part2, request, response){
     console.log(part1 + " and " + part2);
