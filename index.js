@@ -69,35 +69,16 @@ express()
 .get('/seeMem', function(request, response){
     //var albums;
     var mems;
-    getMembers(request, response/*, function(result, function(request, response, mems){
-        var id = parseInt(request.query.id);
-     var pics;
-     getAlbums(id, function(error, result){
-       if(error){
-           response.status(500).json({success: false, data: error});
-       }
-        else if(result == null || result <1){
-            //response.setHeader('Content-Type', 'application/json');
-            //response.send(JSON.stringify(ppl));
-            var pics = "";
+    getMembers(request, response, functioin(result){
+        if(result == 0 || result == null){ 
+            response.render('pages/makeMember.ejs', {'fam': id});
         }
         else{
-        pics = result;
-        console.log("the album..." + pics);
-        var ppl = { 'mem': mems, 'albums': pics}; 
-        console.log(ppl);
-        response.setHeader('Content-Type', 'application/json');
-        response.send(JSON.stringify(ppl));    
-        } //its good
-    }*/
-    ){
-        if(result == 0 || result == null){ response.render('pages/makeMember.ejs', {'fam': id});
-        }
-        else{
-        mems = result;
-        console.log(mems);
-        collectAlbums(request, response, mems);
+            mems = result;
+            console.log(mems);
+            collectAlbums(request, response, mems);
         //callback(request, response, mems);
+        }
     });
     
     //var ppl = getMembers(request, response);
@@ -220,7 +201,7 @@ function getMembers(request, response, callback){
             //response.setHeader('Content-Type', 'application/json');
             //response.send(JSON.stringify(ppl));
            // return result;
-            callback(result, innerCallback);
+            callback(result);
         }
     });
 }
