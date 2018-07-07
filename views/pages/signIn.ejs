@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang ="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="stylesheets/signIn.css" type="text/css" rel="stylesheet">
+</head>
+    <body>
+        <main id="makeMember">
+            <h1>Sign In</h1>
+            <form action="/signIn" method="POST">
+                <label for="fName">First Name: </label>
+                <input type="text" name="fName" placeholder="Your first name..." required>
+                <label for="mPassword">Password: </label>
+                <input type="password" name="mPassword" placeholder="Your password. . . " required>
+                <input type="hidden" name="famId" value="<%= fam %>">
+                <input type="hidden" name="id" value="<%= id %>">
+                <button type="submit" name="action" value="register">Register</button>
+            </form>
+        </main>
+    </body>
+</html>

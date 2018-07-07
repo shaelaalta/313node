@@ -53,6 +53,17 @@ express()
     });
 })
 
+.get('/memSignPage', function(req, res){
+    var famId = parseInt(req.query.famid);
+    var id = parseInt(req.query.id);
+    res.render('pages/signIn', {'fam': famId, 'id': id});
+})
+
+.post('/signIn', function(req, res){
+    console.log('it worked...');
+    res.render('pages/index');
+})
+
 .post('/packageMath', urlencodedParser, function(req, res){
     var price = stampMath(req.body.ozSize, req.body.packageT)
     res.render('pages/price', {data: req.body, 'amount': price});

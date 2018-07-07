@@ -50,12 +50,9 @@ function showAllMembers(id){
 }
 
 function showPpl(ppl){
-    console.log("second sign" + ppl);
-    console.log(ppl.response);
     var loves = ppl.response;
     loves = JSON.parse(loves);
     var list = loves.mem;
-    var albums = loves.albums;
     var show = "";
     var i;
     var len = list.length;  
@@ -66,9 +63,9 @@ function showPpl(ppl){
         show += "<div id='secFam'>";
         show += "<h2>Name: "+ list[i].firstname + "</h2>";
         show += "<h3>Email: "+ list[i].email + "</h3>";
+         show += "<a href='/memSignPage?famid=" + list[i].famid + "&id=" + list[i].id + "'>Sign In</a>";
         show += "</div>";
     }
-
     document.getElementById("family").innerHTML = show;
 }
 
