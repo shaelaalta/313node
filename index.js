@@ -83,6 +83,10 @@ express()
 .get('/albumBunch', function(request, response){
     getFamAlbums(request, response);
 })
+
+.get('/getImages', function(request, response){
+    getPics(request, response);
+})
     
 .get('/getPerson', function(request, response) {
     getPerson(request, response);
@@ -257,6 +261,34 @@ function getFamAlbums(request, response){
 function getAlbums(id, callback){
     var sql = "SELECT * FROM album WHERE famid = $1::int";
     var params= [id];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        }
+        callback(null, result.rows);
+    });
+}
+
+/***************************************
+* get the pictures
+***************************************/
+function getPics(request, response){
+    var id= parseInt(request.query.id);
+    getAllPics(id, function(error, result){
+        if(error){
+            response.status(500).json({success: false, data: error});
+        }
+        var imgs = {'img': result};
+        response.setHeader('Content-Type', 'application/json');
+        response.send(JSON.stringify(imgs));
+    })
+}
+
+function getAllPics(id callback){
+    var sql = "SELECT * FROM image WHERE albumid = $1::int";
+    var params = [id];
     pool.query(sql, params, function(err, result){
         if(err){
             console.log("error in query: ")
