@@ -23,13 +23,13 @@ function showAlbums(data){
         show += "<div id='secFam'>";
         show += "<h2>Name: " + list[i].albumname + "</h2>";
         cosole.log(list[i].id);
-        show += "<button onClick = getAlbums(" + list[i].id + ")>View Album</button>";
+        show += "<button onClick = getAlbumPics(" + list[i].id + ")>View Album</button>";
         show += "</div>";
     }
     document.getElementById("albums").innerHTML = show;
 }
 
-function getAlbums(id){
+function getAlbumPics(id){
     console.log(id); }
     /*xhttp = new XMLHttpRequest();
     var url = '/getImages?id=' + id;
