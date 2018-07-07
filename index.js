@@ -119,6 +119,7 @@ express()
     var imagePlace = result.secure_url;
     var album = request.body.album;
     var name = request.body.imageName;
+    console.log("album id " + album);
     addImage(imagePlace, album, name, function(err, result){
         console.log(result.rows);
         if(err || result == null || result.length < 1){
