@@ -136,7 +136,7 @@ express()
 function addImage(imagePlace, album, name, callback){
     var sql = "INSERT INTO image VALUES (DEFAULT, $1, $2, $3) RETURNING id";
     var params = [name, imagePlace, album];
-    pool.query(sq, params, function(err, result){
+    pool.query(sql, params, function(err, result){
         if(err){
             console.log("error in query: ")
             console.log(err);
