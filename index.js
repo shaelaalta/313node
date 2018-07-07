@@ -120,7 +120,7 @@ express()
     var album = request.body.album;
     var name = request.body.imageName;
     addImage(imagePlace, album, name, function(err, result){
-        if(error || result == null || result.length < 1){
+        if(err || result == null || result.length < 1){
             res.render('pages/index');
         }
         response.render('pages/seeImg.ejs', {'pics': imagePlace, 'album': album, 'name': name})
