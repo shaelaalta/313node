@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang ="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="stylesheets/signIn.css" type="text/css" rel="stylesheet">
+</head>
+    <body>
+        <main id="makeAlbum">
+            <h1><%= name %> Create Album</h1>
+            <form action="/makeAlbum" method="POST">
+                <label for="name">Album Name: </label>
+                <input type="text" name="name" id="name" placeholder="Album name..." required>
+                <input type="hidden" name="famId" value="<%= fam %>">
+                <button type="submit" name="action" value="register">Register</button>
+            </form>
+        </main>
+    </body>
+</html>

@@ -92,6 +92,12 @@ express()
     getPerson(request, response);
     })
 
+.get('/albumPage', function(request, response){
+    var famId = parseInt(req.query.fam);
+    var name = req.query.name;
+    res.render('pages/makeAlbum', {'fam': famId, 'name': name});
+})
+
 .post('/addMemPage', urlencodedParser, function(req, res){
     var famId = req.body.famId;
     res.render('pages/makeMember.ejs', {'fam': famId});
