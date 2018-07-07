@@ -34,18 +34,18 @@ function getAlbumPics(id){
     xhttp.open("GET", url, true);
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
-            showPics(this);
+            showPics(this, id);
         }
     }
     xhttp.send();
 }
 
-function showPics(images){
+function showPics(images, id){
     var img = images.response;
     img = JSON.parse(img);
     var list = img.img;
     var show = "";
-    var show = "<form action='/addPics' method='POST'><input type='hidden' name='albumId' value='" + list[0].albumid + "'><input type='submit' value='Add Image to Album'></form>";
+    var show = "<form action='/addPics' method='POST'><input type='hidden' name='albumId' value='" + id + "'><input type='submit' value='Add Image to Album'></form>";
     var i;
     var len = list.length;
     for(i = 0; i < len; i++){
