@@ -111,6 +111,7 @@ express()
     //var famId = req.body.fam;
     //res.render('pages/loadFile.ejs', {'fam': famId});
     var albumId = req.body.albumId;
+    console.log("addPics albumid: " + albumId);
     res.render('pages/loadFile.ejs', {'album': albumId});
 })
 
