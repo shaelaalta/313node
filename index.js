@@ -195,7 +195,8 @@ function addAlbum(req, res){
         if(error || result == null){
             res.status(500).json({success: false, data: error});
         }
-        res.render('pages/loadFiles');
+        var albumid = result;
+        res.render('pages/loadFile', {'album': albumid});
     })
 }
 
