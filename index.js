@@ -117,11 +117,33 @@ express()
     var imagePlace = result.secure_url;
     var album = request.body.album;
     var name = request.body.imageName;
-    response.render('pages/seeImg.ejs', {'pics': imagePlace, 'album': album, 'name': name})
+    addImage(imagePlace, album, name, function(err, result){
+        if(error || result == null || result.length < 1){
+            res.render('pages/index');
+        }
+        response.render('pages/seeImg.ejs', {'pics': imagePlace, 'album': album, 'name': name})
+    })
     });
 })
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
+
+/***************************************
+* add image to image db
+****************************************/
+function addImage(imagePlace, album, name, callback){
+    var sql = "INSERT INTO image VALUES (DEFAULT, $1, $2, $3) RETURNING id";
+    var params = [name, imagePlace, album];
+    pool.query(sq, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        } else {
+            callback(null, result.rows);
+        }
+    })
+}
 
 /***************************************
 * log someone in
