@@ -37,7 +37,6 @@ function loadData(items){
 }
 
 function showAllMembers(id){
-    console.log("first id: " + id);
     xhttp = new XMLHttpRequest();
     var url = '/seeMem?id='+ id;
     xhttp.open("GET", url, true);

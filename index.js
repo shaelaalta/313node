@@ -79,6 +79,10 @@ express()
 .get('/seeMem', function(request, response){
     getMembers(request, response);
 })
+
+.get('/albumBunch', function(request, response){
+    getFamAlbums(request, response);
+})
     
 .get('/getPerson', function(request, response) {
     getPerson(request, response);
@@ -110,11 +114,13 @@ function checkLogin(req, res){
     var fName = req.body.fName;
     var password = req.body.mPassword;
     var famId = req.body.famId;
+    var id = req.body.id
     verifyMember(fName, password, famId, function(error, result){
         if(error || result == null || result.length < 1){
             res.render('pages/index');
         }
-        res.status(200).json(result[0].id);
+        //res.status(200).json(result[0].id);
+        res.render('pages/famPics', {'fam': famId, 'id': id, 'name': fName});
     });
 }
 
@@ -219,34 +225,7 @@ function getMembers(request, response){
             response.send(JSON.stringify(ppl));
         }
     });
-}
-    
- /*function collectAlbums(request, response, mems){
-     var id = parseInt(request.query.id);
-     var pics;
-     getAlbums(id, function(error, result){
-       if(error){
-           response.status(500).json({success: false, data: error});
-       }
-        else if(result == null || result <1){
-            //response.setHeader('Content-Type', 'application/json');
-            //response.send(JSON.stringify(ppl));
-            var pics = "";
-        }
-        else{
-            pics = result;    
-        }
-    });
-     return pics;
-}*/
-
-/*function sendIt(part1, part2, request, response){
-    console.log(part1 + " and " + part2);
-    var ppl = { 'mem': part1, 'albums': part2 };
-    console.log(ppl);
-    response.setHeader('Content-Type', 'application/json');
-    response.send(JSON.stringify(ppl));
-}*/
+};
 
 function getPplDb(id, callback){
     var sql = "SELECT * FROM member WHERE famid = $1::int";
@@ -259,6 +238,20 @@ function getPplDb(id, callback){
         }
         callback(null, result.rows);
     });
+}
+
+function getFamAlbums(request, response){
+    var id = parseInt(request.query.id);
+    console.log("id for albums: " + id);
+    
+    getAlbums(id, function(error, result){
+        if(error){
+            response.status(500).json({success: false, data: error});
+        }
+        var pics = { 'pic': result };
+        response.setHeader('Content-Type', 'application/json');
+        response.send(JSON.stringify(pics));
+    })
 }
 
 function getAlbums(id, callback){
