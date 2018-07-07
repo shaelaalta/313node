@@ -93,7 +93,7 @@ express()
     })
 
 .get('/albumPage', function(request, response){
-    var famId = parseInt(reqest.query.fam);
+    var famId = parseInt(request.query.fam);
     var name = request.query.name;
     response.render('pages/makeAlbum', {'fam': famId, 'name': name});
 })
