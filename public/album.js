@@ -21,7 +21,7 @@ function showAlbums(data){
     var len = list.length;
     for(i = 0; i < len; i++){
         show += "<div id='secFam'>";
-        show += "<h2>Name: "+ list[i].albumname + "</h2>";
+        show += "<h2>Name: " + list[i].albumname + "</h2>";
         show += "<button onClick = getAlbums(" + list[i].id + ")>View Album</button>";
         show += "</div>";
     }
@@ -41,7 +41,18 @@ function getAlbums(id){
 }
 
 function showPics(images){
-    
+    var img = data.response;
+    img = JSON.parse(img);
+    var list = img.img;
+    var show = "";
+    var i;
+    var len = list.length;
+    for(i = 0; i < len; i++){
+        show += "<div id='secFam'>";
+        show += "<img src='" + list[i].imgplc + "'>";
+        show += "</div>";
+    }
+    document.getElementById("albums").innerHTML = show;
 }
 
 window.addEventListener('load', getAlbums);
