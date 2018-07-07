@@ -41,7 +41,7 @@ function getAlbumPics(id){
 }
 
 function showPics(images){
-    var img = data.response;
+    var img = images.response;
     img = JSON.parse(img);
     var list = img.img;
     var show = "";
