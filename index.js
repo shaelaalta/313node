@@ -286,7 +286,7 @@ function getPics(request, response){
     })
 }
 
-function getAllPics(id callback){
+function getAllPics(id, callback){
     var sql = "SELECT * FROM image WHERE albumid = $1::int";
     var params = [id];
     pool.query(sql, params, function(err, result){
