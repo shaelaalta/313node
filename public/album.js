@@ -29,8 +29,7 @@ function showAlbums(data){
 }
 
 function getAlbumPics(id){
-    console.log(id); }
-    /*xhttp = new XMLHttpRequest();
+    xhttp = new XMLHttpRequest();
     var url = '/getImages?id=' + id;
     xhttp.open("GET", url, true);
     xhttp.onreadystatechange = function(){
@@ -53,7 +52,7 @@ function showPics(images){
         show += "<img src='" + list[i].imgplc + "'>";
         show += "</div>";
     }
-    document.getElementById("albums").innerHTML = show;
-}*/
+    document.getElementById("pictures").innerHTML = show;
+}
 
 window.addEventListener('load', getAlbums);
