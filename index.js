@@ -98,6 +98,10 @@ express()
     response.render('pages/makeAlbum', {'fam': famId, 'name': name});
 })
 
+.post('/makeAlbum', urlencodedParser, function(reqeust, response){
+    addAlbum(request, response);
+})
+
 .post('/addMemPage', urlencodedParser, function(req, res){
     var famId = req.body.famId;
     res.render('pages/makeMember.ejs', {'fam': famId});
@@ -108,10 +112,12 @@ express()
     res.render('pages/loadFile.ejs', {'fam': famId});
 })
 
-.post('/fileupload', upload.single('image'), function(request, response){
+.post('/fileupload', upload.single('image'), urlencodedParser, function(request, response){
     cloudinary.uploader.upload(request.file.path, function(result){
-        var imagePlace = result.secure_url;
-        response.render('pages/famPics.ejs', {'pics': imagePlace})
+    var imagePlace = result.secure_url;
+    var album = request.body.album;
+    var name = request.body.imageName;
+    response.render('pages/seeImg.ejs', {'pics': imagePlace, 'album': album, 'name': name})
     });
 })
 
@@ -178,6 +184,35 @@ function addMember(name, email, password, id, callback){
         }
     })
 }
+
+/********************************************
+* add album to the database
+********************************************/
+function addAlbum(req, res){
+    var name = req.body.name;
+    var famid = req.body.famId;
+    addAlbumDB(name, famid, function(error, result){
+        if(error || result == null){
+            res.status(500).json({success: false, data: error});
+        }
+        res.render('pages/loadFiles');
+    })
+}
+
+function addAlbumDb(name, famid, callback){
+    var sql = "INSERT INTO album VALUES (DEFAULT, $1, $2) RETURNING id";
+    var params = [name, famid];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        } else {
+            callback(null, result.rows);
+        }
+    })
+}
+
 /****************************************************
 * adding a family to the form
 *****************************************************/
