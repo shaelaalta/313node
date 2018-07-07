@@ -199,7 +199,7 @@ function addAlbum(req, res){
     })
 }
 
-function addAlbumDb(name, famid, callback){
+function addAlbumDB(name, famid, callback){
     var sql = "INSERT INTO album VALUES (DEFAULT, $1, $2) RETURNING id";
     var params = [name, famid];
     pool.query(sql, params, function(err, result){
