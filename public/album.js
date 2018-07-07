@@ -28,7 +28,7 @@ function showAlbums(data){
     document.getElementById("albums").innerHTML = show;
 }
 
-getAlbums(id){
+function getAlbums(id){
     xhttp = new XMLHttpRequest();
     var url = '/getImages?id=' + id;
     xhttp.open("GET", url, true);
