@@ -59,9 +59,8 @@ express()
     res.render('pages/signIn', {'fam': famId, 'id': id});
 })
 
-.post('/signIn', function(req, res){
-    console.log('it worked...');
-    res.render('pages/index');
+.post('/signIn', urlencodedParser, function(req, res){
+    checkLogin(req, res);
 })
 
 .post('/packageMath', urlencodedParser, function(req, res){
@@ -104,6 +103,34 @@ express()
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
+/***************************************
+* log someone in
+****************************************/
+function checkLogin(req, res){
+    var fName = req.body.fName;
+    var password = req.body.mPassword;
+    var famId = req.body.famId;
+    verifyMember(fName, password, famId, function(error, result){
+        if(error || result == null || result.length < 1){
+            res.render('pages/index');
+        }
+        res.status(200).json(result[0].id);
+    });
+}
+
+function verifyMember(fName, password, famId, callback){
+    var sql = "SELECT id FROM member WHERE famid = $1 AND firstname = $2 AND password = $3";
+    var params = [famId, fName, password];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        } else {
+            callback(null, result.rows);
+        }
+    })
+}
 
 /****************************************
 * adding a family member
