@@ -108,8 +108,10 @@ express()
 })
 
 .post('/addPics', urlencodedParser, function(req, res){
-    var famId = req.body.fam;
-    res.render('pages/loadFile.ejs', {'fam': famId});
+    //var famId = req.body.fam;
+    //res.render('pages/loadFile.ejs', {'fam': famId});
+    var albumId = req.body.album;
+    res.render('pages/loadFile.ejs', {'album': albumid});
 })
 
 .post('/fileupload', upload.single('image'), urlencodedParser, function(request, response){

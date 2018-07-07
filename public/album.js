@@ -45,6 +45,7 @@ function showPics(images){
     img = JSON.parse(img);
     var list = img.img;
     var show = "";
+    var show = "<form action='/addPics' method='POST'><input type='hidden' name='albumId' value='" + list[0].albumid + "'><input type='submit' value='Add Image to Album'></form>";
     var i;
     var len = list.length;
     for(i = 0; i < len; i++){
