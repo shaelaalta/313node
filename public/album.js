@@ -22,6 +22,7 @@ function showAlbums(data){
     for(i = 0; i < len; i++){
         show += "<div id='secFam'>";
         show += "<h2>Name: " + list[i].albumname + "</h2>";
+        cosole.log(list[i].id);
         show += "<button onClick = getAlbums(" + list[i].id + ")>View Album</button>";
         show += "</div>";
     }
@@ -29,7 +30,8 @@ function showAlbums(data){
 }
 
 function getAlbums(id){
-    xhttp = new XMLHttpRequest();
+    console.log(id);
+    /*xhttp = new XMLHttpRequest();
     var url = '/getImages?id=' + id;
     xhttp.open("GET", url, true);
     xhttp.onreadystatechange = function(){
@@ -53,6 +55,6 @@ function showPics(images){
         show += "</div>";
     }
     document.getElementById("albums").innerHTML = show;
-}
+}*/
 
 window.addEventListener('load', getAlbums);
