@@ -67,22 +67,7 @@ express()
 })
 
 .get('/seeMem', function(request, response){
-    //var albums;
-    var mems;
-    getMembers(request, response, functioin(result){
-        if(result == 0 || result == null){ 
-            response.render('pages/makeMember.ejs', {'fam': id});
-        }
-        else{
-            mems = result;
-            console.log("mems: " + mems);
-            collectAlbums(request, response, mems);
-        }
-    });
-    
-    //var ppl = getMembers(request, response);
-    //var albums = collectAlbums(request, response);
-    //sendIt(mems, albums, request, response);
+    getMembers(request, response);
 })
     
 .get('/getPerson', function(request, response) {
@@ -181,31 +166,24 @@ function getFamilyInfo(lname, mom, dad, city, state, street, password, callback)
 /************************************
 * get members of a family
 ****************************************/
-function getMembers(request, response, callback){
+function getMembers(request, response){
     var id = parseInt(request.query.id);
-    //var mems;
-    //var pics;
-    
     getPplDb(id, function(error, result){
         if(error){
             response.status(500).json({success: false, data: error});
         }
         else if(result == null || result < 1){
-            //response.render('pages/makeMember.ejs', {'fam': id});
-            return 0;
+            response.render('pages/makeMember.ejs', {'fam': id});
         }
         else{
-            //mems = result;
-            //var ppl = { 'mem': result };
-            //response.setHeader('Content-Type', 'application/json');
-            //response.send(JSON.stringify(ppl));
-           // return result;
-            callback(result);
+            var ppl = { 'mem': result };
+            response.setHeader('Content-Type', 'application/json');
+            response.send(JSON.stringify(ppl));
         }
     });
 }
     
- function collectAlbums(request, response, mems){
+ /*function collectAlbums(request, response, mems){
      var id = parseInt(request.query.id);
      var pics;
      getAlbums(id, function(error, result){
@@ -222,7 +200,7 @@ function getMembers(request, response, callback){
         }
     });
      return pics;
-}
+}*/
 
 /*function sendIt(part1, part2, request, response){
     console.log(part1 + " and " + part2);
