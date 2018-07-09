@@ -115,6 +115,10 @@ express()
     res.render('pages/loadFile.ejs', {'album': albumId});
 })
 
+.post('/addJournal', urlencodedParser, function(req, res){
+    addJournal(req, res);
+})
+
 .post('/fileupload', upload.single('image'), urlencodedParser, function(request, response){
     cloudinary.uploader.upload(request.file.path, function(result){
     var imagePlace = result.secure_url;
@@ -231,6 +235,35 @@ function addAlbum(req, res){
 function addAlbumDB(name, famid, callback){
     var sql = "INSERT INTO album VALUES (DEFAULT, $1, $2) RETURNING id";
     var params = [name, famid];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        } else {
+            callback(null, result.rows);
+        }
+    })
+}
+
+/***********************************************
+* add Journal entry to database
+************************************************/
+function addJournal(req, res){
+    var imgId = req.body.imgId;
+    var userId = req.body.pId;
+    var entry = req.body.entry;
+    addEntryDb(imgId, userId, entry, function(error, result){
+        if(error || result == null){
+            res.status(500).json({success: false, data: error});
+        }
+        res.render('pages/journalPage', {'imgId': imgId, 'userId': userId});
+    })
+}
+
+function addEntryDb(imgId, userId, entry, function(error, result){
+    var sql = "INSERT INTO journal VALUES (DEFAULT, $1, $2, $3) RETURNING id";
+    var params = [entry, userId, imgId];
     pool.query(sql, params, function(err, result){
         if(err){
             console.log("error in query: ")

@@ -43,23 +43,26 @@ function getAlbumPics(id){
 function insertText(id, section){
     var pid = document.getElementById('person').textContent;
     
-    var journal = "<form action='/addJournal' method='POST'><textarea name='entry' rows='15' cols='70'>";
+    var journal = "<form action='/addJournal' method='POST'><textarea name='entry' rows='50' cols='150'></textarea>";
     journal += "<input type='hidden' name='imgId' value='" + id + "'>";
     journal += "<input type='hidden' name='pId' value='" + pid + "'>";
     journal += "<input type='submit' value='Add Journal Entry'></form>";
-    
+    journal += "<a href='/journalPage?personId=" + pid + "&imgId" + id + "'>View This Image's Journal Entries</a>"
     var clean = document.getElementById('journal'+ section);
     clean.innerHTML = journal;
 }
 
 function showPics(images, id){
+    document.getElementById('albums').style.display = 'none';
     var img = images.response;
     img = JSON.parse(img);
     var list = img.img;
-    var show = "";
-    var show = "<form action='/addPics' method='POST'><input type='hidden' name='imgId' value='" + id + "'><input type='submit' value='Add Image to Album'></form>";
     var i;
     var len = list.length;
+    var show = "";
+    
+    var show = "<form action='/addPics' method='POST'><input type='hidden' name='imgId' value='" + id + "'><input type='submit' value='Add Image to Album'></form>";
+    
     for(i = 0; i < len; i++){
         show += "<div id='secFam'>";
         show += "<img src='" + list[i].imgplc + "'>";
