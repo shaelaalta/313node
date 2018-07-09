@@ -43,10 +43,10 @@ function getAlbumPics(id){
 function insertText(id, section){
     var pid = document.getElementById('person').textContent;
     
-    var journal = document.createTextNode("<form action='/addJournal' method='POST'><textarea name='entry' rows='15' cols='70'> <input type='hidden' name='imgId' value='" + id + "'><input type='hidden' name='pId' value='" + pid + "'><input type='submit' value='Add Journal Entry'></form>");
-    var parent = document.getElementById('secFam' + section);
-    parent.childNode.insertAfter(journal, parent);
+    var journal = "<form action='/addJournal' method='POST'><textarea name='entry' rows='15' cols='70'> <input type='hidden' name='imgId' value='" + id + "'><input type='hidden' name='pId' value='" + pid + "'><input type='submit' value='Add Journal Entry'></form>";
     
+    var clean = document.getElementById('journal'+ section);
+    clean.innerHTML = journal;
 }
 
 function showPics(images, id){
@@ -58,9 +58,9 @@ function showPics(images, id){
     var i;
     var len = list.length;
     for(i = 0; i < len; i++){
-        show += "<div id='secFam" + i + "'>";
+        show += "<div id='secFam'>";
         show += "<img src='" + list[i].imgplc + "'>";
-        show += "<button onClick = insertText(" + list[i].id + ", " + i + ")>Write About This Memory</button>";
+        show += "<div id='journal" + i + "'><button onClick = insertText(" + list[i].id + ", " + i + ")>Write About This Memory</button></div>";
         show += "</div>";
     }
     document.getElementById("pictures").innerHTML = show;
