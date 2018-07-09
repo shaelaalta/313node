@@ -43,7 +43,10 @@ function getAlbumPics(id){
 function insertText(id, section){
     var pid = document.getElementById('person').textContent;
     
-    var journal = "<form action='/addJournal' method='POST'><textarea name='entry' rows='15' cols='70'> <input type='hidden' name='imgId' value='" + id + "'><input type='hidden' name='pId' value='" + pid + "'><input type='submit' value='Add Journal Entry'></form>";
+    var journal = "<form action='/addJournal' method='POST'><textarea name='entry' rows='15' cols='70'>";
+    journal += "<input type='hidden' name='imgId' value='" + id + "'>";
+    journal += "<input type='hidden' name='pId' value='" + pid + "'>";
+    journal += "<input type='submit' value='Add Journal Entry'></form>";
     
     var clean = document.getElementById('journal'+ section);
     clean.innerHTML = journal;
