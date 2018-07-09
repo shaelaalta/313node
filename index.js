@@ -261,7 +261,7 @@ function addJournal(req, res){
     })
 }
 
-function addEntryDb(imgId, userId, entry, function(error, result){
+function addEntryDb(imgId, userId, entry, callback){
     var sql = "INSERT INTO journal VALUES (DEFAULT, $1, $2, $3) RETURNING id";
     var params = [entry, userId, imgId];
     pool.query(sql, params, function(err, result){
