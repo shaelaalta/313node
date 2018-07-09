@@ -58,9 +58,9 @@ function showPics(images, id){
     var i;
     var len = list.length;
     for(i = 0; i < len; i++){
-        show += "<div id='secFam"+i"'>";
+        show += "<div id='secFam" + i + "'>";
         show += "<img src='" + list[i].imgplc + "'>";
-        show += "<button onClick = insertText(" + list[i].id + ", " + i ")>Write About This Memory</button>";
+        show += "<button onClick = insertText(" + list[i].id + ", " + i + ")>Write About This Memory</button>";
         show += "</div>";
     }
     document.getElementById("pictures").innerHTML = show;
