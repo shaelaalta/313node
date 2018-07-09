@@ -40,17 +40,27 @@ function getAlbumPics(id){
     xhttp.send();
 }
 
+function insertText(id, section){
+    var pid = document.getElementById('person').textContent;
+    
+    var journal = document.createTextNode("<form action='/addJournal' method='POST'><textarea name='entry' rows='15' cols='70'> <input type='hidden' name='imgId' value='" + id + "'><input type='hidden' name='pId' value='" + pid + "'><input type='submit' value='Add Journal Entry'></form>");
+    var parent = document.getElementById('secFam' + section);
+    parent.childNode.insertAfter(journal, parent);
+    
+}
+
 function showPics(images, id){
     var img = images.response;
     img = JSON.parse(img);
     var list = img.img;
     var show = "";
-    var show = "<form action='/addPics' method='POST'><input type='hidden' name='albumId' value='" + id + "'><input type='submit' value='Add Image to Album'></form>";
+    var show = "<form action='/addPics' method='POST'><input type='hidden' name='imgId' value='" + id + "'><input type='submit' value='Add Image to Album'></form>";
     var i;
     var len = list.length;
     for(i = 0; i < len; i++){
-        show += "<div id='secFam'>";
+        show += "<div id='secFam"+i"'>";
         show += "<img src='" + list[i].imgplc + "'>";
+        show += "<button onClick = insertText(" + list[i].id + ", " + i ")>Write About This Memory</button>";
         show += "</div>";
     }
     document.getElementById("pictures").innerHTML = show;

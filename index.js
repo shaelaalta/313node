@@ -164,7 +164,7 @@ function checkLogin(req, res){
             res.render('pages/index');
         }
         //res.status(200).json(result[0].id);
-        res.render('pages/famPics', {'fam': famId, 'id': id, 'name': fName});
+        res.render('pages/famPics', {'fam': famId, 'id': id, 'name': fName, 'person': id});
     });
 }
 
