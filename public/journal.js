@@ -18,7 +18,6 @@ function showJournal(data){
     var happy = data.response;
     happy = JSON.parse(happy);
     var list = happy.je;
-    console.log(list);
     var show = "";
     var i;
     var len = list.length;
@@ -26,7 +25,7 @@ function showJournal(data){
         show += "<div id='secFam'>";
         show += "<h2>Entry Made By " + list[i].firstname + "</h2>";
         show += "<img src='"+ list[i].imgplc + "'>";
-        show + "<p>"+ list[i].entry + "</p>";
+        show += "<p>" + list[i].entry + "</p>";
         show += "</div>";
     }
     document.getElementById("entries").innerHTML = show;
