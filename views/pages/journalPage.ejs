@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang ="en">
-  <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="stylesheets/signIn.css" type="text/css" rel="stylesheet">
+<html>
+<head>
+    <link href="stylesheets/main.css" type="text/css" rel="stylesheet">
 </head>
-    <body>
-        <main id="journal">
-            <h1>Journal Page</h1>
-            <div id="pics"></div>
-            <div id="entries"></div>
-        </main>
-    </body>
+
+<body>
+<script src="journal.js"></script>
+<main id="familyList">
+    <h3 id="imgId" style="display: none;"><%= imgId %></h3>
+    <h3 id="id" style="display: none;"><%= userId %></h3>
+    <div id="picture"></div>
+    <div id="entries"></div>
+</main>
+</body>
 </html>

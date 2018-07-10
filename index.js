@@ -84,6 +84,10 @@ express()
     getFamAlbums(request, response);
 })
 
+.get('/journalBunch', function(request, response){
+    getJournalStuff(request, response);
+})
+
 .get('/getImages', function(request, response){
     getPics(request, response);
 })
@@ -91,6 +95,12 @@ express()
 .get('/getPerson', function(request, response) {
     getPerson(request, response);
     })
+
+.get('/journalPage', function(request, response){
+    var userId = parseInt(request.query.pid);
+    var imgId = parseInt(request.query.imgId);
+    res.render('pages/journalPage', {'imgId': imgId, 'userId': userId});
+})
 
 .get('/albumPage', function(request, response){
     var famId = parseInt(request.query.fam);
@@ -364,6 +374,36 @@ function getFamAlbums(request, response){
 function getAlbums(id, callback){
     var sql = "SELECT * FROM album WHERE famid = $1::int";
     var params= [id];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        }
+        callback(null, result.rows);
+    });
+}
+
+/************************************
+* get journal entries and img
+*************************************/
+ function getJournalStuff(request, response){
+     var imgId = parseInt(request.query.imgId);
+     var id = parseInt(request.query.id);
+     
+     getJournalandImage(imgId, id, error, result){
+         if(error){
+            response.status(500).json({success: false, data: error});
+        }
+        var je = { 'je': result };
+        response.setHeader('Content-Type', 'application/json');
+        response.send(JSON.stringify(je));
+     }
+ }
+
+function getJournalandImage(imgId, id, callback){
+    var sql = "SELECT image.imgplc, journal.entry, member.firstname FROM ((journal INNER JOIN image ON $1 = image.id) INNER JOIN member ON id = member.id)";
+    var params = [imgId, id];
     pool.query(sql, params, function(err, result){
         if(err){
             console.log("error in query: ")
