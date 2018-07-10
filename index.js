@@ -404,7 +404,7 @@ function getAlbums(id, callback){
  }
 
 function getJournalandImage(imgId, id, callback){
-    var sql = "SELECT image.imgplc, journal.entry, member.firstname FROM ((journal INNER JOIN image ON $1 = image.id) INNER JOIN member ON id = member.id)";
+    var sql = "SELECT image.imgplc, journal.entry, member.firstname FROM ((journal INNER JOIN image ON $1 = image.id) INNER JOIN member ON $2 = member.id)";
     var params = [imgId, id];
     pool.query(sql, params, function(err, result){
         if(err){
