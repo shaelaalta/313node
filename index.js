@@ -391,14 +391,14 @@ function getAlbums(id, callback){
      var imgId = parseInt(request.query.imgId);
      var id = parseInt(request.query.id);
      
-     getJournalandImage(imgId, id, error, result){
+     getJournalandImage(imgId, id, function(error, result){
          if(error){
             response.status(500).json({success: false, data: error});
         }
         var je = { 'je': result };
         response.setHeader('Content-Type', 'application/json');
         response.send(JSON.stringify(je));
-     }
+     })
  }
 
 function getJournalandImage(imgId, id, callback){
