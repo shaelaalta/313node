@@ -18,6 +18,7 @@ function showJournal(data){
     var happy = data.response;
     happy = JSON.parse(happy);
     var list = happy.je;
+    console.log(list);
     var show = "";
     var i;
     var len = list.length;
@@ -33,21 +34,3 @@ function showJournal(data){
 }
 
 window.addEventListener('load', getJournal);
-
-//document.getElementById("picture").innerHTML = list;
-    //console.log(list);
-/*function showAlbums(data){
-    var happy = data.response;
-    happy = JSON.parse(happy);
-    var list = happy.pic;
-    var show = "";
-    var i;
-    var len = list.length;
-    for(i = 0; i < len; i++){
-        show += "<div id='secFam'>";
-        show += "<h2>Name: " + list[i].albumname + "</h2>";
-        show += "<button onClick = getAlbumPics(" + list[i].id + ")>View Album</button>";
-        show += "</div>";
-    }
-    document.getElementById("albums").innerHTML = show;
-}*/
