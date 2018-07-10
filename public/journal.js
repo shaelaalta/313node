@@ -2,6 +2,7 @@ function getJournal(){
     xhttp = new XMLHttpRequest();
     var imgId = document.getElementById('imgId').textContent;
     var id = document.getElementById('id').textContent;
+    console.log("image id: " + imgId + " " + "person id: " + id);
     var url = '/journalBunch?imgId=' + imgId + '&id=' + id;
     console.log("journal.js url: " + url);
     xhttp.open("GET", url, true);
