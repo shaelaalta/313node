@@ -18,9 +18,24 @@ function showJournal(data){
     var happy = data.response;
     happy = JSON.parse(happy);
     var list = happy.je;
-    //document.getElementById("picture").innerHTML = list;
-    console.log(list);
+    var show = "";
+    var i;
+    var len = list.length;
+    for(i = 0; i < len; i++){
+        show += "<div id='secFam'>";
+        show += "<h2>Entry Made By " + list[i].firstname + "</h2>";
+        show += "<img src='"+ list[i].imgplc + "'>";
+        show + "<p>"+ list[i].entry + "</p>";
+        show += "</div>";
+    }
+    document.getElementById("entries").innerHTML = show;
+   
 }
+
+window.addEventListener('load', getJournal);
+
+//document.getElementById("picture").innerHTML = list;
+    //console.log(list);
 /*function showAlbums(data){
     var happy = data.response;
     happy = JSON.parse(happy);
@@ -36,5 +51,3 @@ function showJournal(data){
     }
     document.getElementById("albums").innerHTML = show;
 }*/
-
-window.addEventListener('load', getJournal);
