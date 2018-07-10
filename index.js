@@ -263,6 +263,7 @@ function addJournal(req, res){
     var imgId = req.body.imgId;
     var userId = req.body.pId;
     var entry = req.body.entry;
+    console.log("img id: " + imgId + " user id: " + userId + " entry: " + entry);
     addEntryDb(imgId, userId, entry, function(error, result){
         if(error || result == null){
             res.status(500).json({success: false, data: error});
