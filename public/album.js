@@ -47,7 +47,6 @@ function insertText(id, section){
     journal += "<input type='hidden' name='imgId' value='" + id + "'>";
     journal += "<input type='hidden' name='pId' value='" + pid + "'>";
     journal += "<input type='submit' value='Add Journal Entry'></form>";
-    journal += "<a href='/journalPage?personId=" + pid + "&imgId" + id + "'>View This Image's Journal Entries</a>"
     var clean = document.getElementById('journal'+ section);
     clean.innerHTML = journal;
 }
@@ -57,6 +56,7 @@ function showPics(images, id){
     var img = images.response;
     img = JSON.parse(img);
     var list = img.img;
+    var pid = document.getElementById('person').textContent;
     var i;
     var len = list.length;
     var show = "";
@@ -69,6 +69,7 @@ function showPics(images, id){
         show += "<div id='journal" + i + "'><button onClick = insertText(" + list[i].id + ",";
         show += i + ")>Write About This Memory</button></div>";
         show += "</div>";
+        show += "<a href='/journalPage?personId=" + pid + "&imgId" + id + "'>View This Image's Journal Entries</a>";
     }
     document.getElementById("pictures").innerHTML = show;
 }
