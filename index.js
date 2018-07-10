@@ -97,7 +97,7 @@ express()
     })
 
 .get('/viewJournals', function(request, response){
-    var userId = parseInt(request.query.pid);
+    var userId = parseInt(request.query.userId);
     var imgId = parseInt(request.query.imgId);
     response.render('pages/journalPage', {'imgId': imgId, 'userId': userId});
 })
