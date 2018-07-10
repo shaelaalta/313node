@@ -99,7 +99,7 @@ express()
 .get('/journalPage', function(request, response){
     var userId = parseInt(request.query.pid);
     var imgId = parseInt(request.query.imgId);
-    res.render('pages/journalPage', {'imgId': imgId, 'userId': userId});
+    response.render('pages/journalPage', {'imgId': imgId, 'userId': userId});
 })
 
 .get('/albumPage', function(request, response){
