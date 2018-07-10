@@ -96,7 +96,7 @@ express()
     getPerson(request, response);
     })
 
-.get('/journalPage', function(request, response){
+.get('/viewJournals', function(request, response){
     var userId = parseInt(request.query.pid);
     var imgId = parseInt(request.query.imgId);
     response.render('pages/journalPage', {'imgId': imgId, 'userId': userId});
