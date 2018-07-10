@@ -3,6 +3,7 @@ function getJournal(){
     var imgId = document.getElementById('imgId').textContent;
     var id = document.getElementById('id').textContent;
     var url = '/journalBunch?imgId=' + imgId + '&id=' + id;
+    console.log("journal.js url: " + url);
     xhttp.open("GET", url, true);
     xhttp.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
