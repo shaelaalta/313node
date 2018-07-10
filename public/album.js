@@ -68,8 +68,8 @@ function showPics(images, id){
         show += "<img src='" + list[i].imgplc + "'>";
         show += "<div id='journal" + i + "'><button onClick = insertText(" + list[i].id + ",";
         show += i + ")>Write About This Memory</button></div>";
-        show += "</div>";
         show += "<a href='/viewJournals?userId=" + pid + "&imgId=" + list[i].id + "'>View This Image's Journal Entries</a>";
+        show += "</div>";
     }
     document.getElementById("pictures").innerHTML = show;
 }

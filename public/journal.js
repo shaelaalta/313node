@@ -21,10 +21,10 @@ function showJournal(data){
     var show = "";
     var i;
     var len = list.length;
+    show += "<img src='"+ list[i].imgplc + "'>";
     for(i = 0; i < len; i++){
         show += "<div id='secFam'>";
-        show += "<h2>Entry Made By " + list[i].firstname + "</h2>";
-        show += "<img src='"+ list[i].imgplc + "'>";
+        show += "<h2>Journal Entry Made By " + list[i].firstname + "</h2>";
         show += "<p>" + list[i].entry + "</p>";
         show += "</div>";
     }
