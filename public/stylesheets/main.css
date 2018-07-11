@@ -8,6 +8,10 @@ h1 {
     font-family: 'Lobster Two', cursive;
 }
 
+nav {
+    font-family: 'Quicksand', sans-serif;
+}
+
 main {
     font-family: 'Quicksand', sans-serif;
 }
@@ -20,4 +24,9 @@ main {
     text-align: center;
     border-style: solid;
     margin-bottom: 3px;
+}
+
+button {
+    font-family: 'Lobster Two', cursive;
+    margin-bottom: 10px;
 }
