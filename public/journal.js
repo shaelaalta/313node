@@ -18,6 +18,7 @@ function showJournal(data){
     var happy = data.response;
     happy = JSON.parse(happy);
     var list = happy.je;
+    console.log(list);
     var show = "";
     var i;
     var len = list.length;
