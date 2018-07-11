@@ -16,6 +16,10 @@ main {
     font-family: 'Quicksand', sans-serif;
 }
 
+img{
+    max-width: 90vw;
+}
+
 #home {
     padding: 10px;
 }
@@ -29,4 +33,5 @@ main {
 button {
     font-family: 'Lobster Two', cursive;
     margin-bottom: 10px;
+    font-size: 18px;
 }
