@@ -18,11 +18,10 @@ function showJournal(data){
     var happy = data.response;
     happy = JSON.parse(happy);
     var list = happy.je;
-    console.log(list);
     var show = "";
     var i;
     var len = list.length;
-    show += "<img src='"+ list[i].imgplc + "'>";
+    show += "<img src='"+ list[0].imgplc + "'>";
     for(i = 0; i < len; i++){
         show += "<div id='secFam'>";
         show += "<h2>Journal Entry Made By " + list[i].firstname + "</h2>";
