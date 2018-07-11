@@ -6,6 +6,7 @@
     <link href="stylesheets/signIn.css" type="text/css" rel="stylesheet">
 </head>
     <body>
+    <% include ../partials/nav.ejs %>
         <main id="makeAlbum">
             <h1><%= name %> Create Album</h1>
             <form action="/makeAlbum" method="POST">
