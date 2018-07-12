@@ -44,7 +44,7 @@ express()
   saveUninitialized: true
 }))
 
-//.use(bodyParser.json())
+.use(bodyParser.json())
 
 
 .use(express.static(path.join(__dirname, 'public')))
