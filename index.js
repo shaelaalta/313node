@@ -44,8 +44,7 @@ express()
   saveUninitialized: true
 }))
 
-//var bodyParser = require('body-parser');
-.use(bodyParser.json())
+//.use(bodyParser.json())
 
 
 .use(express.static(path.join(__dirname, 'public')))
