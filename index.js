@@ -222,7 +222,7 @@ function loginFamily(req, res){
     console.log("index.js " + req.body.username);
     
     if(req.body.username == "happy" && req.body.password == "day"){
-        req.session.user == req.body.lastname;
+        req.session.user == req.body.username;
         result = {success: true};
     }
     
