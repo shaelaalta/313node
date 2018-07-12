@@ -115,6 +115,11 @@ express()
     response.render('pages/journalPage', {'imgId': imgId, 'userId': userId});
 })
 
+.get('/famLoginPage', function(request, response){
+    var famid = parseInt(request.query.famid);
+    response.render('pages/famLogin', {'id': famid});
+})
+
 .get('/albumPage', function(request, response){
     var famId = parseInt(request.query.fam);
     var name = request.query.name;

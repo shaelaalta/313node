@@ -10,34 +10,6 @@ function showAllFams(){
     xhttp.send();
 }
 
-function login(){
-    var username = $("#lName").val();
-    var password = $("#password").val();
-    
-    console.log("main.js username " + username + " and " + password);
-    
-    var params = {
-        username: username,
-        password: password
-    };
-    
-    console.log("main.js params "+ params);
-    
-    $.post("/famLogin", params, function(result){
-        if (result && result.success) {
-			$("#status").text("Successfully logged in.");
-		} else {
-			$("#status").text("Error logging in.");
-		}
-    });
-}
-
-function FamLogIn(id){
-    var famForm = '<form action="/signIn" method="POST"><label for="lName">Last Name: </label><input type="text" name="lName" id="lName" placeholder="Your Last name..." required><label for="password">Password: </label><input type="password" id="password" name="password" placeholder="Your password. . . " required><input type="hidden" name="famId" value="'+ id + '"><button onclick="login();">Log in</button></form>';
-    
-    document.getElementById("family").innerHTML = famForm;
-}
-
 function loadData(items){
     //console.log(items.response);
     var thing = items.response;
@@ -57,7 +29,7 @@ function loadData(items){
         }
         show += "<h3>Address: "+ list[i].city +", "
             +list[i].state + "<br>" + list[i].street + "</h3>";
-        show += "<button onClick = FamLogIn("+ list[i].id + ")>Log In</button>";
+        show += "<a href='/famLoginPage?famid="+ list[i].id + "'>Log In</a>";
         show += "<button onClick = showAllMembers(" + list[i].id + ")>See Family Members</button>";
         show += "</div>";
     }
