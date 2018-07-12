@@ -142,7 +142,18 @@ express()
     addJournal(req, res);
 })
 
-.post('/famLogin', urlencodedParser, loginFamily);
+.post('/famLogin', urlencodedParser, function(req, res){
+    var result = {success: false};
+    
+    console.log("index.js " + req.body.username);
+    
+    if(req.body.username == "happy" && req.body.password == "day"){
+        req.session.user == req.body.username;
+        result = {success: true};
+    }
+    
+    res.json(result);
+}
 
 .post('/fileupload', upload.single('image'), urlencodedParser, function(request, response){
     cloudinary.uploader.upload(request.file.path, function(result){
@@ -214,7 +225,7 @@ function verifyMember(fName, password, famId, callback){
 /*****************************************
 * log into the family
 *****************************************/
-function loginFamily(req, res){
+/*function loginFamily(req, res){
     var result = {success: false};
     
     console.log("index.js " + req.body.username);
@@ -225,7 +236,7 @@ function loginFamily(req, res){
     }
     
     res.json(result);
-}
+}*/
 
 /****************************************
 * adding a family member
