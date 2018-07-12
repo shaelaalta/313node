@@ -226,7 +226,7 @@ function loginFamily(req, res){
         result = {success: true};
     }
     
-    response.json(result);
+    res.json(result);
 }
 
 /****************************************
