@@ -10,6 +10,12 @@ function showAllFams(){
     xhttp.send();
 }
 
+function famLogIn(id){
+    var famForm = '<form action="/signIn" method="POST"><label for="lName">Last Name: </label><input type="text" name="lName" placeholder="Your Last name..." required><label for="password">Password: </label><input type="password" name="password" placeholder="Your password. . . " required><input type="hidden" name="famId" value="'+ id + '"><button type="submit" name="action" value="register">Register</button></form>';
+    
+    $("#family").load(famForm);
+}
+
 function loadData(items){
     //console.log(items.response);
     var thing = items.response;
@@ -29,6 +35,7 @@ function loadData(items){
         }
         show += "<h3>Address: "+ list[i].city +", "
             +list[i].state + "<br>" + list[i].street + "</h3>";
+        show += "<button onClick = FamLogIn("+ list[i].id + ")";
         show += "<button onClick = showAllMembers(" + list[i].id + ")>See Family Members</button>";
         show += "</div>";
     }
