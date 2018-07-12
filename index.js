@@ -223,7 +223,7 @@ function loginFamily(req, res){
     
     if(req.body.username == "happy" && req.body.password == "day"){
         req.session.user == req.body.lastname;
-        result = {success};
+        result = {success: true};
     }
     
     response.json(result);
