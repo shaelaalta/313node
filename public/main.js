@@ -35,7 +35,7 @@ function loadData(items){
         }
         show += "<h3>Address: "+ list[i].city +", "
             +list[i].state + "<br>" + list[i].street + "</h3>";
-        show += "<button onClick = FamLogIn("+ list[i].id + ")";
+        show += "<button onClick = FamLogIn("+ list[i].id + ")>Log In</button>";
         show += "<button onClick = showAllMembers(" + list[i].id + ")>See Family Members</button>";
         show += "</div>";
     }
