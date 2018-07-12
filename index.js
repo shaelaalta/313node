@@ -7,17 +7,6 @@ var fs= require('fs');
 //const http = require("http");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var session = require('express-session')
-.use(session({
-  secret: 'my-super-secret-secret!',
-  resave: false,
-  saveUninitialized: true
-}))
-
-var bodyParser = require('body-parser')
-.use( bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-}));
 
 var multer = require('multer');
 var storage = multer.diskStorage({
@@ -48,6 +37,20 @@ const pool = new Pool({connectionString: connectionString});
 const PORT = process.env.PORT || 5000
 
 express()
+
+.use(session({
+  secret: 'my-super-secret-secret!',
+  resave: false,
+  saveUninitialized: true
+}))
+
+var bodyParser = require('body-parser')
+.use( bodyParser.json() );       // to support JSON-encoded bodies
+.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
+
+
 .use(express.static(path.join(__dirname, 'public')))
 .use(express.json())
 .set('views', path.join(__dirname, 'views'))
