@@ -10,7 +10,7 @@ function showAllFams(){
     xhttp.send();
 }
 
-function famLogIn(id){
+function FamLogIn(id){
     var famForm = '<form action="/signIn" method="POST"><label for="lName">Last Name: </label><input type="text" name="lName" placeholder="Your Last name..." required><label for="password">Password: </label><input type="password" name="password" placeholder="Your password. . . " required><input type="hidden" name="famId" value="'+ id + '"><button type="submit" name="action" value="register">Register</button></form>';
     
     $("#family").load(famForm);
