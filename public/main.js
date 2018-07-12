@@ -23,13 +23,13 @@ function login(){
     
     console.log("main.js params "+ params);
     
-    $.post("/famLogin", params, function(result){
-        if (result.success) {
+    $.post("/famLogin", params, function(res){
+        if (res && res.success) {
 			$("#status").text("Successfully logged in.");
 		} else {
 			$("#status").text("Error logging in.");
 		}
-    })
+    });
 }
 
 function FamLogIn(id){
