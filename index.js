@@ -219,6 +219,8 @@ function verifyMember(fName, password, famId, callback){
 function loginFamily(req, res){
     var result = {success: false};
     
+    console.log("index.js " + req.body.username);
+    
     if(req.body.username == "happy" && req.body.password == "day"){
         req.session.user == req.body.lastname;
         result = {success};
