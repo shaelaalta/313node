@@ -138,9 +138,7 @@ express()
     res.render('pages/loadFile.ejs', {'album': albumId});
 })
 
-.post('/addJournal', urlencodedParser, function(req, res){
-    addJournal(req, res);
-})
+.post('/addJournal', urlencodedParser, addJournal);
 
 .post('/famLogin', urlencodedParser, function(req, res){
     loginFamily(req, res);
