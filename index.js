@@ -153,7 +153,7 @@ express()
     }
     
     res.json(result);
-}
+});
 
 .post('/fileupload', upload.single('image'), urlencodedParser, function(request, response){
     cloudinary.uploader.upload(request.file.path, function(result){
