@@ -145,10 +145,10 @@ express()
 .post('/famLogin', urlencodedParser, function(req, res){
     var result = {success: false};
     
-    console.log("index.js " + req.body.username);
+    console.log("index.js " + req.body.username + " and password "+ req.body.password);
     
     if(req.body.username == "happy" && req.body.password == "day"){
-        req.session.user == req.body.username;
+        //req.session.user == req.body.username;
         result = {success: true};
     }
     
