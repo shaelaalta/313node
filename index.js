@@ -44,7 +44,7 @@ express()
   saveUninitialized: true
 }))
 
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 .use( bodyParser.json() );       // to support JSON-encoded bodies
 .use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
