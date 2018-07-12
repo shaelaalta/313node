@@ -6,6 +6,19 @@ var formidable = require('formidable');
 var fs= require('fs');
 //const http = require("http");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
+var session = require('express-session')
+.use(session({
+  secret: 'my-super-secret-secret!',
+  resave: false,
+  saveUninitialized: true
+}))
+
+var bodyParser = require('body-parser')
+.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+}));
+
 var multer = require('multer');
 var storage = multer.diskStorage({
   filename: function(req, file, callback) {
@@ -130,6 +143,10 @@ express()
     addJournal(req, res);
 })
 
+.post('/famLogin', urlencodedParser, function(req, res){
+    loginFamily(req, res);
+})
+
 .post('/fileupload', upload.single('image'), urlencodedParser, function(request, response){
     cloudinary.uploader.upload(request.file.path, function(result){
     var imagePlace = result.secure_url;
@@ -195,6 +212,20 @@ function verifyMember(fName, password, famId, callback){
             callback(null, result.rows);
         }
     })
+}
+
+/*****************************************
+* log into the family
+*****************************************/
+function loginFamily(req, res){
+    var result = {success: false};
+    
+    if(req.body.username == "happy" && req.body.password == "day"){
+        req.session.user == req.body.lastname;
+        result = {success};
+    }
+    
+    response.json(result);
 }
 
 /****************************************

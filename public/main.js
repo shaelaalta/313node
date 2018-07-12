@@ -10,8 +10,26 @@ function showAllFams(){
     xhttp.send();
 }
 
+function login(){
+    var username = $("#lName").val();
+    var password = $("#password").val();
+    
+    var params = {
+        username: username,
+        password: password
+    };
+    
+    $.post("/famLogin", params, function(result){
+        if (result && result.success) {
+			$("#status").text("Successfully logged in.");
+		} else {
+			$("#status").text("Error logging in.");
+		}
+    })
+}
+
 function FamLogIn(id){
-    var famForm = '<form action="/signIn" method="POST"><label for="lName">Last Name: </label><input type="text" name="lName" placeholder="Your Last name..." required><label for="password">Password: </label><input type="password" name="password" placeholder="Your password. . . " required><input type="hidden" name="famId" value="'+ id + '"><button type="submit" name="action" value="register">Register</button></form>';
+    var famForm = '<form action="/signIn" method="POST"><label for="lName">Last Name: </label><input type="text" name="lName" id="lName" placeholder="Your Last name..." required><label for="password">Password: </label><input type="password" id="password" name="password" placeholder="Your password. . . " required><input type="hidden" name="famId" value="'+ id + '"><button onclick="login();">Log in</button></form>';
     
     document.getElementById("family").innerHTML = famForm;
 }
