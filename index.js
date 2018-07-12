@@ -138,11 +138,11 @@ express()
     res.render('pages/loadFile.ejs', {'album': albumId});
 })
 
-.post('/addJournal', urlencodedParser, addJournal);
-
-.post('/famLogin', urlencodedParser, function(req, res){
-    loginFamily(req, res);
+.post('/addJournal', urlencodedParser, function(req, res){
+    addJournal(req, res);
 })
+
+.post('/famLogin', urlencodedParser, loginFamily);
 
 .post('/fileupload', upload.single('image'), urlencodedParser, function(request, response){
     cloudinary.uploader.upload(request.file.path, function(result){
