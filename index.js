@@ -181,13 +181,13 @@ express()
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
 function handleLogin(req, res) {
-    var result = {success: false};
+    var result = {'success': false};
     
     console.log("index.js " + req.body.username + " and password "+ req.body.password);
     
     if(req.body.username == "happy" && req.body.password == "day"){
         req.session.user == req.body.username;
-        result = {success: true};
+        result = {'success': true};
     }
     
     console.log(result);
