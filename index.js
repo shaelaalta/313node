@@ -180,7 +180,7 @@ express()
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
-function handleLogin() {
+function handleLogin(req, res) {
     var result = {success: false};
     
     console.log("index.js " + req.body.username + " and password "+ req.body.password);
