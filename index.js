@@ -190,7 +190,6 @@ function handleLogin(req, res) {
         result = {success: true};
     }
     
-    console.log(result);
     res.json(result);
 }
 
