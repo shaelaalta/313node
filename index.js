@@ -160,6 +160,7 @@ express()
     res.json(result);
 })*/
 
+.post('/famLogin', urlencodedParser, handleLogin)
 
 .post('/fileupload', upload.single('image'), urlencodedParser, function(request, response){
     cloudinary.uploader.upload(request.file.path, function(result){
@@ -178,6 +179,19 @@ express()
 })
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
+
+function handleLogin() {
+    var result = {success: false};
+    
+    console.log("index.js " + req.body.username + " and password "+ req.body.password);
+    
+    if(req.body.username == "happy" && req.body.password == "day"){
+        req.session.user == req.body.username;
+        result = {success: true};
+    }
+    
+    res.json(result);
+}
 
 /***************************************
 * add image to image db
