@@ -1,8 +1,8 @@
 function login(){
     var username = $("#lName").val();
     var password = $("#password").val();
-    
-    console.log("main.js username " + username + " and " + password);
+    console.log(username);
+    //console.log("main.js username " + username + " and " + password);
     
     var params = {
         username: username,
