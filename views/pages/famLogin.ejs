@@ -12,12 +12,14 @@
         <main id="makeMember">
             <script src="signIn.js"></script>
             <div id="status"></div>
+            <div id="family">
                 <label for="lName">Last Name: </label>
                 <input type="text" name="lName" id="lName" placeholder="Your Last name..." required>
                 <label for="password">Password: </label>
                 <input type="password" id="password" name="password" placeholder="Your password. . . " required>
                 <input type="hidden" id="famId" name="famId" value="<%= id %>">
                 <button onclick="login()">Log in</button>
+            </div>
         </main>
     </body>
 </html>

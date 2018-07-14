@@ -4,7 +4,6 @@ const url = require('url');
 var bodyParser = require('body-parser');
 var formidable = require('formidable');
 var fs= require('fs');
-//const http = require("http");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var session = require('express-session')
 var bcrypt = require('bcrypt');
@@ -151,19 +150,6 @@ express()
     addJournal(req, res);
 })
 
-/*.post('/famLogin', urlencodedParser, function(req, res){
-    var result = {success: false};
-    
-    console.log("index.js " + req.body.username + " and password "+ req.body.password);
-    
-    if(req.body.username == "happy" && req.body.password == "day"){
-        //req.session.user == req.body.username;
-        result = {success: true};
-    }
-    
-    res.json(result);
-})*/
-
 .post('/famLogin', urlencodedParser, handleLogin)
 
 .post('/fileupload', upload.single('image'), urlencodedParser, function(request, response){
@@ -186,7 +172,6 @@ express()
 
 function handleLogin(request, response){
     var result = {success: false};
-    console.log("index.js " + request.body.username + " and password "+ request.body.password + " and id " + request.body.famid);
     var name = request.body.username;
     var password = request.body.password;
     var id = request.body.famid;
@@ -196,11 +181,8 @@ function handleLogin(request, response){
             console.log("there was an error getting the password from the db");
             response.json(result);
         }
-        console.log(res[0].password + " normal password "+ password);
         bcrypt.compare(password, res[0].password, function(error, ress){
-            console.log(ress);
             if(ress){
-                console.log("cryption worked");
                 result = {success: true};
                 response.json(result);
             }
@@ -213,7 +195,6 @@ function handleLogin(request, response){
 }
 
 function getUserPassword(name, id, callback){
-    console.log("db function... " + id + " name " + name);
     var sql = "SELECT password FROM family WHERE id = $1 AND lastname = $2";
     var params = [id, name];
     pool.query(sql, params, function(err, result){
@@ -253,18 +234,25 @@ function checkLogin(req, res){
     var password = req.body.mPassword;
     var famId = req.body.famId;
     var id = req.body.id
-    verifyMember(fName, password, famId, function(error, result){
+    verifyMember(fName, famId, function(error, result){
         if(error || result == null || result.length < 1){
             res.render('pages/index');
         }
+        bcrypt.compare(password, result[0].password, function(err, ress){
+            if(ress){
+                res.render('pages/famPics', {'fam': famId, 'id': id, 'name': fName, 'person': id});
+            }
+            else{
+                res.render('pages/index');
+            }
         //res.status(200).json(result[0].id);
-        res.render('pages/famPics', {'fam': famId, 'id': id, 'name': fName, 'person': id});
+    });
     });
 }
 
-function verifyMember(fName, password, famId, callback){
-    var sql = "SELECT id FROM member WHERE famid = $1 AND firstname = $2 AND password = $3";
-    var params = [famId, fName, password];
+function verifyMember(fName, famId, callback){
+    var sql = "SELECT password FROM member WHERE famid = $1 AND firstname = $2";
+    var params = [famId, fName];
     pool.query(sql, params, function(err, result){
         if(err){
             console.log("error in query: ")
@@ -276,22 +264,6 @@ function verifyMember(fName, password, famId, callback){
     })
 }
 
-/*****************************************
-* log into the family
-*****************************************/
-/*function loginFamily(req, res){
-    var result = {success: false};
-    
-    console.log("index.js " + req.body.username);
-    
-    if(req.body.username == "happy" && req.body.password == "day"){
-        req.session.user == req.body.username;
-        result = {success: true};
-    }
-    
-    res.json(result);
-}*/
-
 /****************************************
 * adding a family member
 ******************************************/
@@ -300,12 +272,18 @@ function addFamMem(req, res){
     var email = req.body.mEmail;
     var password = req.body.mPassword;
     var fId = req.body.famId;
-    addMember(name, email, password, fId, function(error, result){
-        if(error || result == null || result.length < 1){
+    var hashedPass = bcrypt.hash(password, saltRounds, function(err, hash){
+        if(err)
+            response.render('/');
+        else {
+            addMember(name, email, hash, fId, function(error, result){
+            if(error || result == null || result.length < 1){
             res.status(500).json({success: false, data: error});
-        } else {
-            //res.status(200).json(result[0].id);
-            res.render('pages/index');
+            } else {
+                //res.status(200).json(result[0].id);
+                res.render('pages/index');
+            }
+        });
         }
     });
 }
@@ -462,9 +440,11 @@ function getPplDb(id, callback){
     });
 }
 
+/***********************************************
+* get albums
+************************************************/
 function getFamAlbums(request, response){
     var id = parseInt(request.query.id);
-    console.log("id for albums: " + id);
     
     getAlbums(id, function(error, result){
         if(error){
