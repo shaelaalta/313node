@@ -7,6 +7,8 @@ var fs= require('fs');
 //const http = require("http");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var session = require('express-session')
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 var multer = require('multer');
 var storage = multer.diskStorage({
@@ -30,7 +32,9 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_SECRET
 });
 
-const { Pool } = require("pg");
+const pg = require("pg");
+const Pool = pg.Pool;
+pg.defaults.ssl = true;
 const connectionString = process.env.DATABASE_URL;
 const pool = new Pool({connectionString: connectionString});
 
@@ -182,15 +186,41 @@ express()
 
 function handleLogin(req, res) {
     var result = {success: false};
+    console.log("index.js " + req.body.username + " and password "+ req.body.password + " and id " + req.body.famid);
+    var name = req.body.username;
+    var password = req.body.password;
+    var id = req.body.famid;
     
-    console.log("index.js " + req.body.username + " and password "+ req.body.password);
-    
-    if(req.body.username == "happy" && req.body.password == "day"){
+    getUserPassword(name, id, function(err, res){
+        if(err){
+            console.log("there was an error getting the password from the db");
+            response.json(result);
+        }
+        console.log("this is the response " + res);
+        bcrypt.compare(req.body.password, res, function(err, res){
+        if(err){
+            console.log("there was an error crypting the passwords...")
+            response.json(result);
+        }
         req.session.user == req.body.username;
         result = {success: true};
-    }
-    
-    res.json(result);
+        res.json(result);    
+        })
+    })
+}
+
+function getUserPassword(name, id, callback){
+    var sql = "SELECT password FROM member WHERE famid = $1 AND firstname = $2";
+    var params = [id, name];
+    pool.query(sql, params, function(err, result){
+        if(err){
+            console.log("error in query: ")
+            console.log(err);
+            callback(err, null);
+        } else {
+            callback(null, result.rows);
+        }
+    })
 }
 
 /***************************************
@@ -270,7 +300,8 @@ function addFamMem(req, res){
         if(error || result == null || result.length < 1){
             res.status(500).json({success: false, data: error});
         } else {
-            res.status(200).json(result[0].id);
+            //res.status(200).json(result[0].id);
+            res.render('pages/index');
         }
     });
 }
@@ -359,12 +390,19 @@ function addFamily(req, response){
     var state = req.body.state;
     var street = req.body.street;
     var password = req.body.password;
-    getFamilyInfo(lname, mom, dad, city, state, street, password, function(error, result){
+    var hashedPass = bcrypt.hash(password, saltRounds, function(err, hash){
+        if(err)
+        response.render('/');
+        else {
+        //console.log(hash);
+        getFamilyInfo(lname, mom, dad, city, state, street, hash, function(error, result){
         if(error || result == null || result.lenth < 1){
             response.status(500).json({success: false, data: error});
         } else {
             //response.status(200).json(result[0].id);
            var item = result[0].id; response.render('pages/makeMember.ejs', {'fam': item})
+        }
+        })
         }
     });
 }
