@@ -3,13 +3,25 @@
 /********************
 font-family: 'Lobster Two', cursive;
 font-family: 'Quicksand', sans-serif;
+70A9A1
+9EC1A3
+CFE0C3
 *********************/
+header{
+    background-color: #9EC1A3;
+}
+
 h1 {
     font-family: 'Lobster Two', cursive;
 }
 
 nav {
     font-family: 'Quicksand', sans-serif;
+    background-color: #70A9A1;
+}
+
+body{
+    background-color: #CFE0C3;
 }
 
 main {
@@ -18,6 +30,12 @@ main {
 
 #home {
     padding: 10px;
+}
+
+#logo{
+    float: left;
+    max-width: 300px;
+    width: 20vw;
 }
 
 #secFam{
