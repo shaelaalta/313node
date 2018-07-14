@@ -7,8 +7,15 @@ font-family: 'Quicksand', sans-serif;
 9EC1A3
 CFE0C3
 *********************/
-header{
+body{ 
+    padding: 0px;
+    margin: 0px;
     background-color: #9EC1A3;
+    
+}
+
+header{
+    padding: 3px;
 }
 
 h1 {
@@ -17,15 +24,13 @@ h1 {
 
 nav {
     font-family: 'Quicksand', sans-serif;
+    clear: both;
     background-color: #70A9A1;
-}
-
-body{
-    background-color: #CFE0C3;
 }
 
 main {
     font-family: 'Quicksand', sans-serif;
+    background-color: #CFE0C3;
 }
 
 #home {
