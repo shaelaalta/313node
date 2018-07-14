@@ -184,33 +184,37 @@ express()
 
 .listen(PORT, () => console.log(`listening on port ${ PORT }`));
 
-function handleLogin(req, res) {
+function handleLogin(request, response){
     var result = {success: false};
-    console.log("index.js " + req.body.username + " and password "+ req.body.password + " and id " + req.body.famid);
-    var name = req.body.username;
-    var password = req.body.password;
-    var id = req.body.famid;
+    console.log("index.js " + request.body.username + " and password "+ request.body.password + " and id " + request.body.famid);
+    var name = request.body.username;
+    var password = request.body.password;
+    var id = request.body.famid;
     
     getUserPassword(name, id, function(err, res){
         if(err){
             console.log("there was an error getting the password from the db");
             response.json(result);
         }
-        console.log("this is the response " + res);
-        bcrypt.compare(req.body.password, res, function(err, res){
-        if(err){
+        console.log(res[0].password + " normal password "+ password);
+        bcrypt.compare(password, res[0].password, function(error, ress){
+            console.log(ress);
+            if(ress){
+                console.log("cryption worked");
+                result = {success: true};
+                response.json(result);
+            }
+            else{
             console.log("there was an error crypting the passwords...")
             response.json(result);
-        }
-        req.session.user == req.body.username;
-        result = {success: true};
-        res.json(result);    
-        })
-    })
+            }
+        });
+    });
 }
 
 function getUserPassword(name, id, callback){
-    var sql = "SELECT password FROM member WHERE famid = $1 AND firstname = $2";
+    console.log("db function... " + id + " name " + name);
+    var sql = "SELECT password FROM family WHERE id = $1 AND lastname = $2";
     var params = [id, name];
     pool.query(sql, params, function(err, result){
         if(err){
