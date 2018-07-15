@@ -41,7 +41,6 @@ function showPpl(ppl){
     var i;
     var len = list.length;  
     show += "<form action='/addMemPage' method='POST'><input type='hidden' name='famId' value='" + list[0].famid + "'><input type='submit' value='Add Family Member'></form>";
-    show += "<form action='/addPics' method='POST'><input type='hidden' name='fam' value='" + list[0].famid + "'><input type='submit' value='Upload Images'></form>";
     
     for(i = 0; i < len; i++){
         show += "<div id='secFam'>";

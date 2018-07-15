@@ -177,10 +177,11 @@ function handleLogin(request, response){
     var id = request.body.famid;
     
     getUserPassword(name, id, function(err, res){
-        if(err){
+        if(err || res == null){
             console.log("there was an error getting the password from the db");
-            response.json(result);
+            response.end(json(result));
         }
+        else{
         bcrypt.compare(password, res[0].password, function(error, ress){
             if(ress){
                 result = {success: true};
@@ -191,6 +192,7 @@ function handleLogin(request, response){
             response.json(result);
             }
         });
+        }
     });
 }
 
@@ -555,7 +557,6 @@ function familiesDb(callback){
         callback(null, result.rows);
     });
 }
-
 
 /************************************
 * gets person from db
