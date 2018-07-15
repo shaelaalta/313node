@@ -141,7 +141,7 @@ express()
 .post('/addPics', urlencodedParser, function(req, res){
     //var famId = req.body.fam;
     //res.render('pages/loadFile.ejs', {'fam': famId});
-    var albumId = req.body.albumId;
+    var albumId = req.body.imgId;
     console.log("addPics albumid: " + albumId);
     res.render('pages/loadFile.ejs', {'album': albumId});
 })
