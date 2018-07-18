@@ -21,7 +21,7 @@
         }
         show += "<h3>Address: "+ list[i].city +", "
             +list[i].state + "<br>" + list[i].street + "</h3>";
-        show += "<button><a href='/seeMem?id=" + list[i].id +"'>See Family Members</a></button>"
+        show += "<a href='/seeMem?id=" + list[i].id +"'>See Family Members</a>"
         show += "</div>";
     }
     document.getElementById("existMember").innerHTML = show;
