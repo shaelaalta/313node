@@ -41,18 +41,72 @@ main {
     float: left;
     max-width: 300px;
     width: 20vw;
+    margin-right: 6px;
 }
 
 #secFam{
     text-align: center;
     border-style: solid;
     margin-bottom: 3px;
+    padding-bottom: 17px;
 }
 
 button {
     font-family: 'Lobster Two', cursive;
     margin-bottom: 10px;
     font-size: 18px;
+}
+
+#buttonLike {
+    font-family: 'Lobster Two', cursive;
+    font-size: 18px;
+    text-decoration: none;
+    background-color: white;
+    border: solid black 0.5px;
+    border-radius: 3px;
+    padding: 7px;
+    margin-bottom: 20px;
+}
+
+#buttonLike:link {
+    color: black;
+}
+
+#buttonLike:visited {
+    color: black;
+}
+
+#buttonLike:hover {
+    color: white;
+    background-color: #70A9A1;
+}
+
+#buttonLike:active {
+    color: black;
+}
+
+.enterFam{
+    box-sizing: border-box;
+    text-decoration: none;
+    text-align: center;
+    background-color: white;
+    border: solid black 0.5px;
+    border-radius: 3px;
+    padding: 7px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    margin-bottom: 17px;
+}
+
+.enterFam:link, .enterFam:visited, .enterFam:active {
+    color: black;
+}
+
+.enterFam:hover{
+    color: white;
+    background-color: #70A9A1;
 }
 
 img{
